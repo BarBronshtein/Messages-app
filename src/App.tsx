@@ -8,7 +8,7 @@ function App() {
 				{/* <Header /> */}
 				<main>
 					<Routes>
-						<Route exect path="/" element={<LoginForm />} />
+						<Route path="/" element={<LoginForm />} />
 						{/* <Route path="/messages" element={<ChatList />} /> */}
 						{/* <Route path="*" element={<NotFound />} /> */}
 					</Routes>

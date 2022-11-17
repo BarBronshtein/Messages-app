@@ -17,10 +17,13 @@ const Avatar = ({ imgSize, imgUrl = '' }: Props) => {
 			size = '28px';
 			break;
 		case 'md':
-			size = '36px';
+			size = '40px';
 			break;
 		case 'lg':
-			size = '48px';
+			size = '56px';
+			break;
+		case 'xl':
+			size = '80px';
 			break;
 		default:
 			size = '14px';
