@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useEffectUpdate } from './useEffectUpdate';
 
-export const useFormRegister = <T>(initialState: T, cb?: Function) => {
+export const useFormRegister = <T>(initialState: T, cb: Function) => {
 	const [fields, setFields] = useState(initialState);
 
 	useEffectUpdate(() => {
 		cb?.(fields);
 	}, [fields]);
 
-	const handleChange = (ev: Event) => {
-		const target = ev.target as HTMLInputElement;
+	const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+		const target = ev.target;
 		const field = target.name;
 		const value = target.type === 'number' ? +target.value || '' : target.value;
 		setFields(prefFields => ({ ...prefFields, [field]: value }));
@@ -24,9 +24,9 @@ export const useFormRegister = <T>(initialState: T, cb?: Function) => {
 		};
 	};
 
-	const resetFields = () => {
+	const resetForm = () => {
 		setFields(() => initialState);
 	};
-
-	return [register, resetFields];
+	// return [register,resetForm]
+	return { register, resetForm };
 };
