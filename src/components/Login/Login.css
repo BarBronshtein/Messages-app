@@ -1,0 +1,8 @@
+.fa-brands {
+	height: 18px;
+}
+
+.fa-brands::before {
+	position: relative;
+	top: -4px;
+}
