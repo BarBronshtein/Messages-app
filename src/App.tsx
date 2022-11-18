@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/Login/Login';
+import NotFound from './components/NotFound/NotFound';
 function App() {
 	return (
 		<Router>
@@ -10,7 +11,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<LoginForm />} />
 						{/* <Route path="/messages" element={<ChatList />} /> */}
-						{/* <Route path="*" element={<NotFound />} /> */}
+						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</main>
 			</div>
