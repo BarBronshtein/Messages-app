@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 type Props = {
-	imgSize: string;
+	imgSize: 'sm' | 'md' | 'lg' | 'xl' | '';
 	imgUrl: string;
 };
 const Avatar = ({ imgSize, imgUrl = '' }: Props) => {
