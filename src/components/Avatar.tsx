@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const sizes = { sm: '28px', md: '40px', lg: '56px', xl: '80px', '': '14px' };
 type Props = {
-	imgSize: 'sm' | 'md' | 'lg' | 'xl' | '';
+	imgSize: keyof typeof sizes;
 	imgUrl: string;
 };
 const Avatar = ({ imgSize, imgUrl = '' }: Props) => {
@@ -11,23 +12,8 @@ const Avatar = ({ imgSize, imgUrl = '' }: Props) => {
 			'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
 	}
 
-	let size: string;
-	switch (imgSize) {
-		case 'sm':
-			size = '28px';
-			break;
-		case 'md':
-			size = '40px';
-			break;
-		case 'lg':
-			size = '56px';
-			break;
-		case 'xl':
-			size = '80px';
-			break;
-		default:
-			size = '14px';
-	}
+	let size = sizes[imgSize];
+
 	return (
 		<div
 			style={{ backgroundImage: `url(${imgUrl})` }}

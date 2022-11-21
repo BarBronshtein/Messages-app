@@ -7,9 +7,18 @@ const SearchForm = () => {
 		e.preventDefault();
 		resetForm();
 	};
+	document.querySelectorAll;
 	return (
 		<form onSubmit={onSubmit}>
-			<input type="text" {...register('txt')} />
+			<div className="input-group relative  w-full ">
+				<span className="fa-solid fa-magnifying-glass absolute text-sm text-gray-400 top-[0.8rem] left-4"></span>
+				<input
+					placeholder="Search"
+					className="px-12 py-2 bg-slate-700 rounded-[100px] border-none outline-none text-gray-400"
+					type="text"
+					{...register('txt')}
+				/>
+			</div>
 		</form>
 	);
 };

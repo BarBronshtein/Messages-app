@@ -13,7 +13,7 @@ const SideBar = () => {
 	return (
 		<aside className="grid-cols-3 fixed">
 			<header className="flex justify-between">
-				<Avatar imgUrl="" imgSize="md" />
+				<Avatar imgUrl="" imgSize="sm" />
 				<h4>
 					User fullname <i className="fa-solid fa-chevron-down"></i>
 				</h4>
