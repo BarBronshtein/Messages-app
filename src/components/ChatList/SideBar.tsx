@@ -6,7 +6,7 @@ const SideBar = () => {
 	const list = [
 		{ name: 'Chats', icon: 'fa-solid fa-comment' },
 		{ name: 'Marketplace', icon: 'fa-solid fa-store' },
-		{ name: 'archive', icon: 'fa-solid fa-box-archive' },
+		{ name: 'Archive', icon: 'fa-solid fa-box-archive' },
 	];
 	const location = useLocation();
 	const activeLoc = location.pathname.split('/').at(-1);
@@ -21,7 +21,10 @@ const SideBar = () => {
 			</header>
 			<section className="flex flex-col">
 				{list.map(el => (
-					<div className={`flex ${activeLoc === el.name ? 'active' : ''}`}>
+					<div
+						key={el.name}
+						className={`flex ${activeLoc === el.name ? 'active' : ''}`}
+					>
 						<span className={el.icon}></span>
 						<p>{el.name}</p>
 					</div>

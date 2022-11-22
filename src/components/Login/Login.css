@@ -1,8 +1,11 @@
-.fa-brands {
+/*.fa-brands {
 	height: 18px;
+}*/
+.form-wrapper .input-group .fa-solid {
+	top: 1.25rem;
 }
-
-.fa-brands::before {
+/* .fa-brands::before {
 	position: relative;
 	top: -4px;
 }
+*/
