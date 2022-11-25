@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import Avatar from '../Avatar';
+type Props = { isShown: boolean; onClose: () => void };
+const SideBar = ({ isShown, onClose }: Props) => {
+	const ref = useRef<null | HTMLElement>(null);
 
-const SideBar = () => {
+	const handleClickOutside = (ev: React.MouseEvent) => {
+		const target = ev.target;
+		if (!target || !ref.current) return;
+		if (!ref.current?.contains(target as Node)) onClose();
+	};
+
 	const list = [
 		{ name: 'Chats', icon: 'fa-solid fa-comment' },
 		{ name: 'Marketplace', icon: 'fa-solid fa-store' },
 		{ name: 'Archive', icon: 'fa-solid fa-box-archive' },
 	];
+
 	const location = useLocation();
 	const activeLoc = location.pathname.split('/').at(-1);
-	return (
-		<aside className="grid-cols-3 fixed">
+
+	return ReactDOM.createPortal(
+		<aside
+			ref={ref}
+			className={'grid-cols-3 fixed' + isShown ? 'show' : ''}
+			onClick={handleClickOutside}
+		>
 			<header className="flex justify-between">
 				<Avatar imgUrl="" imgSize="sm" />
 				<h4>
@@ -30,7 +45,8 @@ const SideBar = () => {
 					</div>
 				))}
 			</section>
-		</aside>
+		</aside>,
+		document.querySelector('.modal-root') as Element
 	);
 };
 export default SideBar;
