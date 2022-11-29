@@ -7,7 +7,6 @@ const SearchForm = () => {
 		e.preventDefault();
 		resetForm();
 	};
-	document.querySelectorAll;
 	return (
 		<form onSubmit={onSubmit}>
 			<div className="input-group relative  w-full ">
