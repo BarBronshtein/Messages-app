@@ -1,17 +1,20 @@
 import React from 'react';
-type Props = {
+export type Msg = {
 	type?: 'video' | 'img';
 	url?: string;
 	txt: string;
 };
 
-const Msg = (props: Props) => {
+const MsgPreview = ({ txt, url, type }: Msg) => {
 	const urlRegex =
 		/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-	const words = props.txt.split(' ');
+	const words = txt.split(' ');
+	const markup =
+		type === 'video' ? <video src={url}></video> : <img src={url} />;
 
 	return (
 		<div className="msg max-w-[300]">
+			<div>{type && markup}</div>
 			<p>
 				{words.map(word =>
 					word.match(urlRegex) ? <a href={word}>{word} </a> : word + ' '
@@ -21,4 +24,4 @@ const Msg = (props: Props) => {
 	);
 };
 
-export default Msg;
+export default MsgPreview;
