@@ -1,12 +1,12 @@
 import React from 'react';
-import MsgPreview, { Msg } from './Msg';
+import MsgPreview, { Message } from './Msg';
 type Props = {
-	msgList: Msg[];
+	messages: Message[];
 };
-const MsgList = ({ msgList }: Props) => {
+const MsgList = ({ messages }: Props) => {
 	return (
 		<div>
-			{msgList.map(msg => (
+			{messages.map(msg => (
 				<MsgPreview txt={msg.txt} url={msg.url} type={msg.type} />
 			))}
 		</div>

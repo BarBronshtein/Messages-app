@@ -1,7 +1,16 @@
 import React from 'react';
+import ChatHeader from './ChatHeader';
+import MsgList from './MsgList';
+import SendBar from './SendBar';
 
 const Chat = () => {
-	return <div></div>;
+	return (
+		<section className="chat">
+			<ChatHeader />
+			<MsgList messages={[]} />
+			<SendBar />
+		</section>
+	);
 };
 
 export default Chat;

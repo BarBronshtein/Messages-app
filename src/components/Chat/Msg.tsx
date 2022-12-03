@@ -1,11 +1,11 @@
 import React from 'react';
-export type Msg = {
+export type Message = {
 	type?: 'video' | 'img';
 	url?: string;
 	txt: string;
 };
 
-const MsgPreview = ({ txt, url, type }: Msg) => {
+const MsgPreview = ({ txt, url, type }: Message) => {
 	const urlRegex =
 		/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 	const words = txt.split(' ');
@@ -17,7 +17,7 @@ const MsgPreview = ({ txt, url, type }: Msg) => {
 			<div>{type && markup}</div>
 			<p>
 				{words.map(word =>
-					word.match(urlRegex) ? <a href={word}>{word} </a> : word + ' '
+					word.match(urlRegex) ? <a href={word}>{word + ' '}</a> : word + ' '
 				)}
 			</p>
 		</div>
