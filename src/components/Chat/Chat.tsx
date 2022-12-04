@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatHeader from './ChatHeader';
-import MsgList from './MsgList';
+import MsgList from './Msg/MsgList';
 import SendBar from './SendBar';
 
 const Chat = () => {

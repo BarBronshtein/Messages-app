@@ -1,5 +1,5 @@
 import React from 'react';
-import MsgForm from './MsgForm';
+import MsgForm from './Msg/MsgForm';
 
 const SendBar = () => {
 	const isMobile =

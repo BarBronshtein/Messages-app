@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormRegister } from '../../CustomHooks/useFormRegister';
+import { useFormRegister } from '../../../CustomHooks/useFormRegister';
 
 const MsgForm = () => {
 	const { register, resetForm } = useFormRegister({ msg: '' }, () => {});
