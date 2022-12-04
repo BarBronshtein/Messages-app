@@ -23,12 +23,14 @@ const SideBar = ({ isShown, onClose }: Props) => {
 	const handleClickOutside = (ev: MouseEvent) => {
 		const target = ev.target;
 		if (!target || !ref.current) return;
-		if (!ref.current?.contains(target as Node)) onClose();
-		el.current.classList.add('z-[-1]');
+		if (!ref.current?.contains(target as Node)) {
+			onClose();
+			el.current.classList.add('z-[-1]', 'cursor-default');
+		}
 	};
 
 	const className =
-		'relative bg-slate-800 text-white transition-all w-[90vw] cursor-default ' +
+		'relative bg-slate-800 p-2 z-10 text-white transition-all w-[90vw] cursor-default ' +
 		(isShown ? 'translate-x-[0]' : 'translate-x-[-100vw]');
 	const list = [
 		{ name: 'chats', icon: 'fa-solid fa-comment' },
@@ -40,22 +42,24 @@ const SideBar = ({ isShown, onClose }: Props) => {
 	const activeLoc = location.pathname.split('/').at(-1);
 	return ReactDOM.createPortal(
 		<aside ref={ref} className={className}>
-			<header className="flex justify-between items-center px-2 py-3">
-				<Avatar imgUrl="" imgSize="sm" />
-				<h4>
+			<header className="flex relative justify-between items-center px-4 py-3">
+				<Avatar imgUrl="" imgSize="sm" className="cursor-pointer" />
+				<h4 className="grow ml-12 cursor-pointer">
 					User fullname <i className="fa-solid fa-chevron-down"></i>
 				</h4>
-				<span className="fa-solid fa-gear"></span>
+				<span className="fa-solid fa-gear cursor-pointer"></span>
 			</header>
 			<section className="flex flex-col capitalize">
 				{list.map(el => (
 					<div
 						key={el.name}
-						className={`flex items-center text-white ${
+						className={`flex items-center cursor-pointer hover:bg-gray-500 rounded p-3 text-white ${
 							activeLoc === el.name ? 'bg-gray-600' : ''
 						} ${el.name === 'marketplace' ? 'relative left-[-2px]' : ''}`}
 					>
-						<span className={el.icon + ' mr-11 p-3 text-xl'}></span>
+						<span
+							className={el.icon + ' bg-slate-500 px-2 py-1 rounded mr-11 text-xl'}
+						></span>
 						<p>{el.name}</p>
 					</div>
 				))}

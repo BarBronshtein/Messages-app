@@ -10,7 +10,7 @@ const ChatListHeader = () => {
 						setOpen(() => true);
 						const el = document.getElementById('modal-root');
 						if (!el) return;
-						el.classList.remove('z-[-1]');
+						el.classList.remove('z-[-1]', 'cursor-default');
 						el.classList.add('cursor-pointer', 'opacity-05');
 					}}
 					className="fa-solid fa-bars bg-slate-300  rounded-full p-2 cursor-pointer"
