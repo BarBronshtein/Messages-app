@@ -1,5 +1,5 @@
 import React from 'react';
-import MsgPreview, { Message } from './Msg/Msg';
+import MsgPreview, { Message } from './Msg';
 type Props = {
 	messages: Message[];
 };
