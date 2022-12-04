@@ -9,11 +9,11 @@ const SearchForm = () => {
 	};
 	return (
 		<form onSubmit={onSubmit}>
-			<div className="input-group relative  w-full ">
-				<span className="fa-solid fa-magnifying-glass absolute text-sm text-gray-400 top-[0.8rem] left-4"></span>
+			<div className="input-group py-4 relative z-[-5] w-full ">
+				<span className="fa-solid fa-magnifying-glass absolute text-sm text-gray-400 top-[2.2rem] left-4"></span>
 				<input
 					placeholder="Search"
-					className="px-12 py-2 bg-slate-700 rounded-[100px] border-none outline-none text-gray-400"
+					className="px-12 py-4 bg-slate-700 rounded-full border-none outline-none text-gray-400 w-full max-w-[415px]"
 					type="text"
 					{...register('txt')}
 				/>

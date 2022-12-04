@@ -1,5 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import Chat from './components/Chat/Chat';
+import ChatList from './components/ChatList/ChatList';
 import LoginForm from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
 function App() {
@@ -9,7 +11,8 @@ function App() {
 				<main>
 					<Routes>
 						<Route path="/" element={<LoginForm />} />
-						{/* <Route path="/messages" element={<ChatList />} /> */}
+						<Route path="/chats" element={<ChatList />} />
+						{/* <Route path="/chats/:id" element={<Chat />} /> */}
 						<Route path="*" element={<NotFound />} />/
 					</Routes>
 				</main>

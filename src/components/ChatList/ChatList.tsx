@@ -4,7 +4,7 @@ import ProfileList from './ProfileList';
 import SearchForm from './SearchForm';
 const ChatList = () => {
 	return (
-		<section className="chat-list">
+		<section className="chat-list p-4">
 			<ChatListHeader />
 			<SearchForm />
 			<ProfileList users={[]} />

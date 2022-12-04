@@ -4,15 +4,21 @@ const ChatListHeader = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
-			<header className="flex">
+			<header className="flex items-center py-4 px-2 justify-between max-w-[415px]">
 				<span
-					onClick={() => setOpen(() => true)}
-					className="fa-regular fa-bars"
+					onClick={() => {
+						setOpen(() => true);
+						const el = document.getElementById('modal-root');
+						if (!el) return;
+						el.classList.remove('z-[-1]');
+						el.classList.add('cursor-pointer', 'opacity-05');
+					}}
+					className="fa-solid fa-bars bg-slate-300  rounded-full p-2 cursor-pointer"
 				></span>
-				<h1>Chats</h1>
-				<span className="fa-solid fa-pen"></span>
+				<h1 className="absolute left-16">Chats</h1>
+				<span className="fa-solid fa-pen bg-slate-300 rounded-full p-2 cursor-pointer"></span>
 			</header>
-			<SideBar isShown={open} onClose={() => setOpen(() => false)} />
+			<SideBar isShown={open} onClose={() => setOpen(() => false)}></SideBar>
 		</>
 	);
 };

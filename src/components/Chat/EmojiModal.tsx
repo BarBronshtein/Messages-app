@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EmojiModal = () => {
-	return <div></div>;
+	return <div className="emoji-modal"></div>;
 };
 
 export default EmojiModal;

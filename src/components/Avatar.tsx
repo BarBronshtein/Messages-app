@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const sizes = { sm: '28px', md: '40px', lg: '56px', xl: '80px', '': '14px' };
 type Props = {
@@ -16,15 +15,15 @@ const Avatar = ({ imgSize, imgUrl = '' }: Props) => {
 
 	return (
 		<div
-			style={{ backgroundImage: `url(${imgUrl})` }}
-			className={`rounded-full w-[${size}] h-[${size}]]`}
+			style={{
+				background: `url(${imgUrl}) no-repeat center/cover`,
+				width: size,
+				height: size,
+			}}
+			className={`rounded-full`}
 		></div>
 		// 	<img className={`rounded-full w-[${size}] h-[${size}]`} src={imgUrl} alt="" />
 	);
-};
-
-Avatar.propTypes = {
-	size: PropTypes.number,
 };
 
 export default Avatar;

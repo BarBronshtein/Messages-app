@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 // MAC like scrollbar
-body {
-}
+
 ::-webkit-scrollbar {
 	width: 8px;
 	background-color: rgba(0, 0, 0, 0);

@@ -1,52 +1,67 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import Avatar from '../Avatar';
+type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };
 const SideBar = ({ isShown, onClose }: Props) => {
 	const ref = useRef<null | HTMLElement>(null);
+	const el = useRef<Element>(document.getElementById('modal-root') as Element);
 
-	const handleClickOutside = (ev: React.MouseEvent) => {
+	useEffect(() => {
+		el.current?.addEventListener(
+			'click' as keyof ElementEventMap,
+			handleClickOutside as EventListener
+		);
+		return () =>
+			el.current?.removeEventListener(
+				'click' as keyof ElementEventMap,
+				handleClickOutside as EventListener
+			);
+	}, []);
+
+	const handleClickOutside = (ev: MouseEvent) => {
 		const target = ev.target;
 		if (!target || !ref.current) return;
 		if (!ref.current?.contains(target as Node)) onClose();
+		el.current.classList.add('z-[-1]');
 	};
 
+	const className =
+		'relative bg-slate-800 text-white transition-all w-[90vw] cursor-default ' +
+		(isShown ? 'translate-x-[0]' : 'translate-x-[-100vw]');
 	const list = [
-		{ name: 'Chats', icon: 'fa-solid fa-comment' },
-		{ name: 'Marketplace', icon: 'fa-solid fa-store' },
-		{ name: 'Archive', icon: 'fa-solid fa-box-archive' },
+		{ name: 'chats', icon: 'fa-solid fa-comment' },
+		{ name: 'marketplace', icon: 'fa-solid fa-store' },
+		{ name: 'archive', icon: 'fa-solid fa-box-archive' },
 	];
 
 	const location = useLocation();
 	const activeLoc = location.pathname.split('/').at(-1);
-
 	return ReactDOM.createPortal(
-		<aside
-			ref={ref}
-			className={'grid-cols-3 fixed' + isShown ? 'show' : ''}
-			onClick={handleClickOutside}
-		>
-			<header className="flex justify-between">
+		<aside ref={ref} className={className}>
+			<header className="flex justify-between items-center px-2 py-3">
 				<Avatar imgUrl="" imgSize="sm" />
 				<h4>
 					User fullname <i className="fa-solid fa-chevron-down"></i>
 				</h4>
 				<span className="fa-solid fa-gear"></span>
 			</header>
-			<section className="flex flex-col">
+			<section className="flex flex-col capitalize">
 				{list.map(el => (
 					<div
 						key={el.name}
-						className={`flex ${activeLoc === el.name ? 'active' : ''}`}
+						className={`flex items-center text-white ${
+							activeLoc === el.name ? 'bg-gray-600' : ''
+						} ${el.name === 'marketplace' ? 'relative left-[-2px]' : ''}`}
 					>
-						<span className={el.icon}></span>
+						<span className={el.icon + ' mr-11 p-3 text-xl'}></span>
 						<p>{el.name}</p>
 					</div>
 				))}
 			</section>
 		</aside>,
-		document.querySelector('.modal-root') as Element
+		el.current
 	);
 };
 export default SideBar;
