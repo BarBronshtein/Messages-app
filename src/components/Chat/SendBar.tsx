@@ -5,8 +5,8 @@ const SendBar = () => {
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
 	return (
-		<footer className="SendBar flex items-center">
-			{isMobile && <span className="fa-regular fa-camera"></span>}
+		<footer className="SendBar flex items-center fixed bottom-4 text-2lg text-blue-600 w-screen justify-around sm:text-2xl">
+			{isMobile && <span className="fa-solid fa-camera"></span>}
 			<span className="fa-solid fa-image"></span>
 			<span className="fa-solid fa-microphone"></span>
 			<MsgForm />

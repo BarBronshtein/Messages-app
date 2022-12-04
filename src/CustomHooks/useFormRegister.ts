@@ -8,7 +8,9 @@ export const useFormRegister = <T>(initialState: T, cb: Function) => {
 		cb?.(fields);
 	}, [fields]);
 
-	const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (
+		ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
 		const target = ev.target;
 		const field = target.name;
 		const value = target.type === 'number' ? +target.value || '' : target.value;
