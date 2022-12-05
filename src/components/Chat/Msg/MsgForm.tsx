@@ -26,7 +26,7 @@ const MsgForm = () => {
 					onInput={ev => auto_height(ev.target as HTMLTextAreaElement)}
 				></textarea>
 				{!register('msg').value && (
-					<span className="fa-solid fa-face-smile absolute right-4 top-[0.7rem] sm:top-[0.5rem]"></span>
+					<span className="fa-solid fa-face-smile absolute right-4 top-[0.7rem] sm:top-[0.45rem]"></span>
 				)}
 			</div>
 		</form>
