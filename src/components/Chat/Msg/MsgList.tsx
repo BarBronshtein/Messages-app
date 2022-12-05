@@ -5,7 +5,7 @@ type Props = {
 };
 const MsgList = ({ messages }: Props) => {
 	return (
-		<div>
+		<div className="col-start-2">
 			{messages.map(msg => (
 				<MsgPreview txt={msg.txt} url={msg.url} type={msg.type} />
 			))}

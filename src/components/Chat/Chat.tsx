@@ -5,7 +5,7 @@ import SendBar from './SendBar';
 
 const Chat = () => {
 	return (
-		<section className="chat grid-cols-3 ">
+		<section className="chat">
 			<ChatHeader />
 			<MsgList messages={[]} />
 			<SendBar />
