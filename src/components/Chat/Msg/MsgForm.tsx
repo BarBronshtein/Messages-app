@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormRegister } from '@/CustomHooks/useFormRegister';
 type Props = {
 	isTexting: boolean;
 	setIsTexting: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const MsgForm = ({}: Props) => {
+const MsgForm = ({ isTexting, setIsTexting }: Props) => {
 	const { register, resetForm } = useFormRegister({ msg: '' }, () => {});
+	const { value } = register('msg');
 	function auto_height(elem: HTMLTextAreaElement) {
 		elem.style.height = '1px';
 		elem.style.height = elem.scrollHeight + 'px';
 		return;
 	}
+	useEffect(() => {
+		if (!isTexting && value) return setIsTexting(true);
+		if (isTexting && !value) return setIsTexting(false);
+	}, [value]);
 	return (
 		<form
 			className="w-[80%]"
@@ -20,7 +25,7 @@ const MsgForm = ({}: Props) => {
 				resetForm();
 			}}
 		>
-			<div className="input-group relative ">
+			<div className="input-group relative">
 				<textarea
 					cols={20}
 					rows={1}

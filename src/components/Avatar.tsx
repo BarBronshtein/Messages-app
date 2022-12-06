@@ -21,7 +21,7 @@ const Avatar = ({ imgSize, imgUrl, className }: Props) => {
 				width: size,
 				height: size,
 			}}
-			className={`rounded-full ${className}`}
+			className={`rounded-full ${className ? className : ''}`}
 		></div>
 		// 	<img className={`rounded-full w-[${size}] h-[${size}]`} src={imgUrl} alt="" />
 	);

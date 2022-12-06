@@ -9,10 +9,19 @@ const ChatList = () => {
 	};
 	const onChangeInput = utilService.debounce(getUsers, 400);
 	return (
-		<section className="chat-list p-4">
+		<section className="chat-list p-4 min-h-screen flex flex-col">
 			<ChatListHeader />
 			<SearchForm onChangeInput={onChangeInput} />
-			<ProfileList users={[]} />
+			<ProfileList
+				users={[
+					{
+						_id: 'i101',
+						fullname: 'Barry Bravov',
+						imgUrl: '',
+						lastMsg: { txt: 'hi', timestamp: Date.now() },
+					},
+				]}
+			/>
 		</section>
 	);
 };
