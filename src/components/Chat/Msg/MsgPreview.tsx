@@ -8,6 +8,7 @@ export type Message = {
 };
 
 const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
+	const loggedinUser = 'currentUser'; // Replace with session user once loggedinUser is implemented
 	const urlRegex =
 		/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 	const words = txt.split(' ');
@@ -16,13 +17,20 @@ const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
 
 	return (
 		<div
-			className={`msg grid grid-cols-[${
-				fromUser !== 'currentUser' ? '300px_1fr' : '1fr_300px'
-			}]`}
+			className="msg grid"
+			style={{
+				gridTemplateColumns: fromUser !== loggedinUser ? '300px 1fr' : '1fr 300px',
+			}}
 		>
-			<div className={`col-start-${fromUser !== 'currentUser' ? '1' : '2'}`}>
+			<div
+				className={`rounded-full w-fit col-start-${
+					fromUser !== 'currentUser'
+						? '1 bg-gray-300'
+						: '2 text-right bg-blue-500 text-white justify-self-end'
+				}`}
+			>
 				{!!type && <div> {markup}</div>}
-				<p>
+				<p className="p-3">
 					{words.map(word =>
 						word.match(urlRegex) ? <a href={word}>{word + ' '}</a> : word + ' '
 					)}

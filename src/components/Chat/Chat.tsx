@@ -14,6 +14,11 @@ const Chat = () => {
 						fromUser: '123456',
 						txt: 'hi how are you',
 					},
+					{
+						id: 'i102',
+						fromUser: 'currentUser',
+						txt: 'Im good how r u?',
+					},
 				]}
 			/>
 			<SendBar />
