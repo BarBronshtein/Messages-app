@@ -1,7 +1,8 @@
-function createEventEmitter() {
+function createEventEmitter(navigation?: boolean) {
 	return {
-		on(eventName: string, listener: (...args: any[]) => () => void) {
+		on(eventName: string, listener: Function) {
 			const callListener = ({ detail }: any) => {
+				if (navigation) detail = detail === '/' ? detail : '/' + detail;
 				listener(detail);
 			};
 			window.addEventListener(eventName, callListener);
@@ -9,10 +10,11 @@ function createEventEmitter() {
 				window.removeEventListener(eventName, callListener);
 			};
 		},
-		emit(eventName: string, data: unknown) {
+		emit(eventName: string, data: any) {
 			window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
 		},
 	};
 }
 
+export const navigationEventBus = createEventEmitter(true);
 export const eventBus = createEventEmitter();
