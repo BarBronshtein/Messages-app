@@ -18,7 +18,7 @@ const ChatList = () => {
 						_id: 'i101',
 						fullname: 'Barry Bravov',
 						imgUrl: '',
-						lastMsg: { txt: 'hi', timestamp: Date.now() },
+						lastMsg: { txt: 'hi', timestamp: 1670324193063 },
 					},
 				]}
 			/>

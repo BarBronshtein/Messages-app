@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfilePreview from './ProfilePreview';
-type User = {
+export type User = {
 	fullname: string;
 	lastMsg: { txt: string; timestamp: number };
 	imgUrl: string;
