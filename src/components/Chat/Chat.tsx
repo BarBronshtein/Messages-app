@@ -3,10 +3,10 @@ import ChatHeader from './ChatHeader';
 import MsgList from './Msg/MsgList';
 import SendBar from './SendBar';
 
-const Chat = () => {
+const Chat = (props: { className?: string }) => {
 	return (
 		<section className="chat flex flex-col min-h-screen">
-			<ChatHeader />
+			<ChatHeader className={props.className} />
 			<MsgList
 				messages={[
 					{

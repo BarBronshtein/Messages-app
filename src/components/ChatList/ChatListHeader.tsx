@@ -10,7 +10,7 @@ const ChatListHeader = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
-			<header className="flex items-center py-4 px-2 justify-between max-w-[415px]">
+			<header className="flex items-center py-4 px-2 justify-between max-w-[550px]">
 				<span
 					onClick={() => closeSideBar()}
 					className="fa-solid fa-bars bg-slate-300  rounded-full p-2 cursor-pointer"

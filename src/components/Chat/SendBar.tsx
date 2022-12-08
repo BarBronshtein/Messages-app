@@ -5,7 +5,7 @@ const SendBar = () => {
 	const [isTexting, setIsTexting] = useState(false);
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
-	const footerClass = `send-bar flex col-start-2 items-center p-2 text-lg text-blue-600 w-screen sm:text-xl ${
+	const footerClass = `send-bar flex col-start-2 items-center p-2 text-lg text-blue-600 sm:text-xl ${
 		isTexting ? 'justify-evenly' : 'justify-between'
 	}`;
 	return (

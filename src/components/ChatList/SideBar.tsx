@@ -1,8 +1,8 @@
-import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import Avatar from '../Avatar';
-const ProfileModal = lazy(() => import('../ProfileModal/ProfileModal'));
+import ProfileModal from '../ProfileModal/ProfileModal';
 
 type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };
@@ -20,11 +20,12 @@ const SideBar = ({ isShown, onClose }: Props) => {
 		if (!target || !ref.current) return;
 		if (!ref.current?.contains(target as Node)) {
 			onClose();
+			setIsOpen(() => false);
 			el.current.classList.add('z-[-1]', 'cursor-default');
 		}
 	}, []);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		el.current?.addEventListener(
 			'click' as keyof ElementEventMap,
 			handleClickOutside as EventListener

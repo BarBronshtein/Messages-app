@@ -1,9 +1,10 @@
-.loading .loader {
-	position: fixed;
+.loader {
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	.circle {
-		background-color: #222;
-	}
+}
+
+.loader .circle {
+	background-color: #222;
 }

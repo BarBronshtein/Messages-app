@@ -2,18 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar';
 
-const ChatHeader = () => {
+const ChatHeader = ({ className }: { className?: string }) => {
 	const sendTo = '/chats/';
 	return (
-		<header className="chat-header shadow-[inset_0_0_4px] shadow-[#00000033] items-center text-blue-600 flex justify-around p-2 text-lg sm:text-xl">
+		<header
+			className={`chat-header shadow-[inset_0_0_4px] shadow-[#00000033] items-center flex justify-around p-2 text-lg sm:text-xl ${className}`}
+		>
 			<Link to={sendTo}>
-				<span className="fa-solid fa-arrow-left cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
+				<span className="fa-solid text-blue-600 fa-arrow-left cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			</Link>
 			<div className="flex grow ml-8">
 				<Avatar imgSize="sm" imgUrl="" />
 				<span className="ml-4">user fullname</span>
 			</div>
-			<span className="fa-solid fa-circle-info cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
+			<span className="fa-solid fa-circle-info text-blue-600 cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 		</header>
 	);
 };
