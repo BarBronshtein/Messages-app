@@ -1,12 +1,28 @@
-import React, { useEffect, useRef } from 'react';
+import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import Avatar from '../Avatar';
+const ProfileModal = lazy(() => import('../ProfileModal/ProfileModal'));
+
 type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };
+
 const SideBar = ({ isShown, onClose }: Props) => {
 	const ref = useRef<null | HTMLElement>(null);
 	const el = useRef<Element>(document.getElementById('modal-root') as Element);
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	const location = useLocation();
+
+	const handleClickOutside = useCallback((ev: MouseEvent) => {
+		const target = ev.target;
+		if (!target || !ref.current) return;
+		if (!ref.current?.contains(target as Node)) {
+			onClose();
+			el.current.classList.add('z-[-1]', 'cursor-default');
+		}
+	}, []);
 
 	useEffect(() => {
 		el.current?.addEventListener(
@@ -20,15 +36,6 @@ const SideBar = ({ isShown, onClose }: Props) => {
 			);
 	}, []);
 
-	const handleClickOutside = (ev: MouseEvent) => {
-		const target = ev.target;
-		if (!target || !ref.current) return;
-		if (!ref.current?.contains(target as Node)) {
-			onClose();
-			el.current.classList.add('z-[-1]', 'cursor-default');
-		}
-	};
-
 	const className =
 		'relative bg-slate-800 p-2 z-10 text-white transition-all w-[90vw] cursor-default max-w-[373px] h-screen ' +
 		(isShown ? 'translate-x-[0]' : 'translate-x-[-100vw]');
@@ -38,23 +45,29 @@ const SideBar = ({ isShown, onClose }: Props) => {
 		{ name: 'archive', icon: 'fa-solid fa-box-archive' },
 	];
 
-	const location = useLocation();
-	const activeLoc = location.pathname.split('/').at(-1);
 	return ReactDOM.createPortal(
 		<aside ref={ref} className={className}>
 			<header className="flex relative justify-between items-center px-4 py-3">
 				<Avatar imgUrl="" imgSize="sm" className="cursor-pointer" />
-				<h4 className="grow ml-12 cursor-pointer">
-					User fullname <i className="fa-solid fa-chevron-down"></i>
+				<h4
+					className="grow ml-12 cursor-pointer"
+					onClick={() => setIsOpen(prev => !prev)}
+				>
+					User fullname{' '}
+					<i className={`fa-solid fa-chevron-${isOpen ? 'down' : 'up'}`}></i>
 				</h4>
-				<span className="fa-solid fa-gear cursor-pointer"></span>
+				<span
+					className="fa-solid fa-gear cursor-pointer"
+					onClick={() => setIsOpen(prev => !prev)}
+				></span>
+				{isOpen && <ProfileModal />}
 			</header>
 			<section className="flex flex-col capitalize">
 				{list.map(el => (
 					<div
 						key={el.name}
 						className={`flex items-center cursor-pointer hover:bg-gray-500 rounded p-3 text-white ${
-							activeLoc === el.name ? 'bg-gray-600' : ''
+							location.pathname.includes(el.name) ? 'bg-gray-600' : ''
 						} ${el.name === 'marketplace' ? 'relative left-[-2px]' : ''}`}
 					>
 						<span

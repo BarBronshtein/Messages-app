@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { navigationEventBus, eventBus } from './services/eventBus.service';
+import { eventBus } from './services/eventBus.service';
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/ChatList/ChatList'));
 const LoginForm = lazy(() => import('./components/Login/Login'));
@@ -16,7 +16,7 @@ function App() {
 		navigate(`${to}`);
 	};
 	useEffect(() => {
-		const gotoUnsubscribe = navigationEventBus.on('onGoTo', navigate);
+		const gotoUnsubscribe = eventBus.on('onGoTo', navigate);
 		const logoutUnsubscribe = eventBus.on('onLogout', logout);
 		return () => {
 			gotoUnsubscribe();
@@ -29,8 +29,8 @@ function App() {
 				<Suspense fallback={<div>Loading...</div>}>
 					<Routes>
 						<Route path="/" element={<LoginForm />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="/profile-edit" element={<ProfileEdit />} />
+						<Route path="/personal-info" element={<Profile />} />
+						<Route path="/personal-info/edit" element={<ProfileEdit />} />
 						<Route path="/chats" element={<ChatList />} />
 						<Route path="/chats/:id" element={<Chat />} />
 						<Route path="*" element={<NotFound />} />

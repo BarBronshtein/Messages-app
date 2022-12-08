@@ -1,8 +1,7 @@
-function createEventEmitter(navigation?: boolean) {
+function createEventEmitter() {
 	return {
 		on(eventName: string, listener: Function) {
 			const callListener = ({ detail }: any) => {
-				if (navigation) detail = detail === '/' ? detail : '/' + detail;
 				listener(detail);
 			};
 			window.addEventListener(eventName, callListener);
@@ -16,5 +15,4 @@ function createEventEmitter(navigation?: boolean) {
 	};
 }
 
-export const navigationEventBus = createEventEmitter(true);
 export const eventBus = createEventEmitter();
