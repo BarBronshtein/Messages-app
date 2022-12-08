@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { PersonalInfoEdit as mount } from 'auth/Personal-Info-Edit';
-const AppHeader = lazy(() => import('../AppHeader/AppHeader'));
+const AppHeader = lazy(() => import('../../components/AppHeader/AppHeader'));
 import './ProfileEdit.css';
 const ProfileEdit = () => {
 	const ref = useRef(null);

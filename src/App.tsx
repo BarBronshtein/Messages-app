@@ -4,10 +4,10 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { eventBus } from './services/eventBus.service';
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/ChatList/ChatList'));
-const LoginForm = lazy(() => import('./components/Login/Login'));
-const Profile = lazy(() => import('./components/Profile/Profile'));
-const ProfileEdit = lazy(() => import('./components/ProfileEdit/ProfileEdit'));
-const NotFound = lazy(() => import('./components/NotFound/NotFound'));
+const LoginForm = lazy(() => import('./pages/Login/Login'));
+const Profile = lazy(() => import('./pages/Profile/Profile'));
+const ProfileEdit = lazy(() => import('./pages/ProfileEdit/ProfileEdit'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 function App() {
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
