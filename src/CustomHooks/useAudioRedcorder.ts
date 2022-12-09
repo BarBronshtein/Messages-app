@@ -4,15 +4,14 @@ enum RECORD_STATUS {
 	RECORDING = 'recording',
 	IDLE = 'idle',
 }
+let mediaRecorder: MediaRecorder;
+let localStream: MediaStream;
 
 export const useAudioRecorder = () => {
-	let mediaRecorder: MediaRecorder;
-	let localStream: MediaStream;
-
 	const dataArray = useRef<Blob[]>([]);
 	const [status, setStatus] = useState<RECORD_STATUS>(RECORD_STATUS.IDLE);
 	const [audioResult, setAudioResult] = useState<Blob>(null!);
-	const [errorMessage, setErrorMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState<object | string>('');
 
 	const startRecording = () => {
 		if (status !== RECORD_STATUS.IDLE) return;
@@ -34,7 +33,6 @@ export const useAudioRecorder = () => {
 	const stopRecording = () => {
 		if (status === RECORD_STATUS.IDLE) return;
 		mediaRecorder.stop();
-
 		mediaRecorder.onstop = () => {
 			const audioData = new Blob(dataArray.current, { type: 'audio/webm;' });
 			dataArray.current = [];
@@ -45,6 +43,7 @@ export const useAudioRecorder = () => {
 				.forEach((track: MediaStreamTrack) => track.stop());
 		};
 	};
+
 	return {
 		startRecording,
 		stopRecording,

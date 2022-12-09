@@ -1,8 +1,8 @@
 import React from 'react';
 import { utilService } from '../../services/util.service';
-import ChatListHeader from './ChatListHeader';
-import ProfileList from './ProfileList';
-import SearchForm from './SearchForm';
+import ChatListHeader from './ChatListCmp/ChatListHeader';
+import ProfileList from './ChatListCmp/ProfileList';
+import SearchForm from './ChatListCmp/SearchForm';
 const ChatList = () => {
 	const getUsers = ({ txt }: { txt: string }) => {
 		// dispatch(queryUsers())

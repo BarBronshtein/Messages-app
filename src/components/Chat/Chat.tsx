@@ -1,7 +1,7 @@
 import React from 'react';
-import ChatHeader from './ChatHeader';
+import ChatHeader from './ChatCmp/ChatHeader';
 import MsgList from './Msg/MsgList';
-import SendBar from './SendBar';
+import SendBar from './ChatCmp/SendBar';
 
 const Chat = (props: { className?: string }) => {
 	return (

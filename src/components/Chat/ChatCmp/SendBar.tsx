@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MsgForm from './Msg/MsgForm';
-
+import MsgForm from '../Msg/MsgForm';
+import AudioRecorder from './AudioRecorder';
 const SendBar = () => {
 	const [isTexting, setIsTexting] = useState(false);
 	const isMobile =
@@ -10,9 +10,7 @@ const SendBar = () => {
 	}`;
 	return (
 		<footer className={footerClass}>
-			{!isTexting && (
-				<span className="fa-solid fa-microphone cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
-			)}
+			{!isTexting && <AudioRecorder />}
 			{isMobile && (
 				<span className="fa-solid fa-camera hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}

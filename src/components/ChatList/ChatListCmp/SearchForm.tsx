@@ -1,5 +1,5 @@
 import React, { FormEvent, useRef } from 'react';
-import { useFormRegister } from '../../CustomHooks/useFormRegister';
+import { useFormRegister } from '@/CustomHooks/useFormRegister';
 
 const SearchForm = (props: { onChangeInput: (...args: any[]) => void }) => {
 	const { register, resetForm } = useFormRegister(

@@ -1,8 +1,8 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
-import Avatar from '../Avatar';
-import ProfileModal from '../ProfileModal/ProfileModal';
+import Avatar from '@/components/Avatar';
+import ProfileModal from '@/components/ProfileModal/ProfileModal';
 
 type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };

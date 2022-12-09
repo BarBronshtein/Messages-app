@@ -1,10 +1,24 @@
 export const utilService = {
 	debounce,
 	timeAgo,
+	makeId,
 };
 
-function debounce(func: Function, wait = 500) {
-	let timeout: number;
+function makeId(length = 8) {
+	let id = '';
+	const str = 'abcdefghijklmnopqrstubwxyz0123456789';
+	for (let i = 0; i < length; i++) {
+		id += str.charAt(getRandIntInc(0, str.length));
+	}
+	return id;
+}
+
+function getRandIntInc(min: number, max: number) {
+	return Math.trunc(Math.random() * (max + min - 1) + min);
+}
+
+function debounce(func: (...args: any[]) => void, wait = 500) {
+	let timeout: any;
 
 	return function executedFunction(...args: any[]) {
 		const later = () => {
@@ -20,6 +34,7 @@ function debounce(func: Function, wait = 500) {
 function timeAgo(input: Date | string | number) {
 	const date = input instanceof Date ? input : new Date(+input);
 	const formatter = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+
 	const ranges = {
 		years: 3600 * 24 * 365,
 		months: 3600 * 24 * 30,
@@ -29,6 +44,7 @@ function timeAgo(input: Date | string | number) {
 		minutes: 60,
 		seconds: 1,
 	};
+
 	const secondsElapsed = (date.getTime() - Date.now()) / 1000;
 	let key: keyof typeof ranges;
 	for (key in ranges) {
