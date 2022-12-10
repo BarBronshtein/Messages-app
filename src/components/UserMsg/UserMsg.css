@@ -1,0 +1,15 @@
+.user-msg.error,
+.user-msg.sucess {
+	opacity: 1;
+	transform: translate(-50px, -50px);
+}
+
+.user-msg.sucess {
+	color: white;
+	background-color: #32cd32db;
+}
+
+.user-msg.error {
+	background-color: #dc143cdb;
+	color: white;
+}
