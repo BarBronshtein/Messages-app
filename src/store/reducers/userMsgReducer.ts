@@ -1,6 +1,10 @@
 export const SET_MSG = 'SET_MSG' as const;
-const INITIAL_STATE = {
-	msg: {},
+type UserMsg = {
+	type: 'error' | 'sucess';
+	txt: string;
+};
+const INITIAL_STATE: { msg: UserMsg | null } = {
+	msg: null,
 };
 type Action = {
 	type: typeof SET_MSG;

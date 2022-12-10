@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { eventBus } from './services/eventBus.service';
 import Loader from './components/Loader/Loader';
+import UserMsg from './components/UserMsg/UserMsg';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/ChatList/ChatList'));
@@ -22,6 +23,7 @@ function App() {
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
 	};
+
 	useEffect(() => {
 		const gotoUnsubscribe = eventBus.on('onGoTo', navigate);
 		const logoutUnsubscribe = eventBus.on('onLogout', logout);
@@ -45,6 +47,7 @@ function App() {
 					</Routes>
 				</Suspense>
 			</main>
+			<UserMsg />
 		</div>
 	);
 }
