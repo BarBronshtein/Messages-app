@@ -13,7 +13,7 @@ const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
 		/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 	const words = txt.split(' ');
 	const types = {
-		video: <video src={url}></video>,
+		video: <video controls src={url}></video>,
 		img: <img src={url} />,
 		audio: <audio controls src={url}></audio>,
 	};

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MsgForm from '../Msg/MsgForm';
-import AudioRecorder from './AudioRecorder';
+import MsgForm from '../../Msg/MsgForm';
+import AudioRecorder from './SendBarCmp/AudioRecorder';
 const SendBar = () => {
 	const [isTexting, setIsTexting] = useState(false);
 	const isMobile =

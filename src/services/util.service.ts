@@ -62,12 +62,14 @@ function timeAgo(input: Date | string | number) {
 	}
 }
 
-function getFileDataUrl(file: File) {
+function getFileDataUrl(file: File): Promise<string> {
+	if (file.size > 1348576) return Promise.reject('File is too large');
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
-		reader.onload = () => {
-			const dataUrl = reader.result;
-			resolve(dataUrl);
+		reader.onload = ev => {
+			const dataUrl = ev.target?.result;
+
+			resolve(dataUrl as string);
 		};
 		reader.onerror = error => {
 			reject(error);
