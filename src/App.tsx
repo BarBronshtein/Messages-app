@@ -40,9 +40,20 @@ function App() {
 						<Route path="/" element={<LoginForm />} />
 						<Route path="/personal-info" element={<Profile />} />
 						<Route path="/personal-info/edit" element={<ProfileEdit />} />
-						{!isMobile && <Route path="/chats" element={<ChatArea />}></Route>}
-						{isMobile && <Route path="/chats" element={<ChatList />} />}
-						{isMobile && <Route path="/chats/:id" element={<Chat />} />}
+						{!isMobile && (
+							<>
+								<Route path="/chats" element={<ChatArea />}></Route>
+								<Route path="/chats/:id" element={<ChatArea />}></Route>
+							</>
+						)}
+
+						{isMobile && (
+							<>
+								<Route path="/chats" element={<ChatList />} />
+								<Route path="/chats/:id" element={<Chat />} />
+							</>
+						)}
+
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>
