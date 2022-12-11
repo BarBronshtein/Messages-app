@@ -38,7 +38,7 @@ const SideBar = ({ isShown, onClose }: Props) => {
 	}, []);
 
 	const className =
-		'relative bg-slate-800 p-2 z-10 text-white transition-all w-[90vw] cursor-default max-w-[373px] h-screen ' +
+		'relative bg-slate-800 p-2 z-10 text-white transition-all w-[90vw] cursor-default max-w-[350px] h-screen ' +
 		(isShown ? 'translate-x-[0]' : 'translate-x-[-100vw]');
 	const list = [
 		{ name: 'chats', icon: 'fa-solid fa-comment' },

@@ -1,17 +1,10 @@
 import React from 'react';
 
-const DefaultChat = ({ className }: { className: string }) => {
+const DefaultChat = () => {
 	return (
 		<div
-			className={`${className}} bg-[top_8rem] bg-cover bg-[url('https://www.shutterstock.com/image-illustration/social-media-colored-seamless-pattern-260nw-1338496568.jpg')]`}
-		>
-			{/* <div className="hero absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-				<img
-					src="https://www.shutterstock.com/image-illustration/social-media-colored-seamless-pattern-260nw-1338496568.jpg"
-					alt="welcome image"
-				/>
-			</div> */}
-		</div>
+			className={`relative bg-center bg-cover bg-no-repeat bg-[url('https://www.messengerpeople.com/wp-content/uploads/2022/05/facebook-messenger-newsletters-mp-blog-title-01.png')]`}
+		></div>
 	);
 };
 

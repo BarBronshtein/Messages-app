@@ -1,13 +1,11 @@
 import { useAudioRecorder } from '@/CustomHooks/useAudioRedcorder';
 import { utilService } from '@/services/util.service';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AudioRecorder = () => {
-	const { startRecording, stopRecording, errorMessage, audioResult } =
-		useAudioRecorder();
+	const { startRecording, stopRecording, audioResult } = useAudioRecorder();
 	useEffect(() => {
 		if (!audioResult) return;
-		console.log(audioResult);
 		// Do something
 		// messages.push({ type: 'audio', id: utilService.makeId() });
 	}, [audioResult]);

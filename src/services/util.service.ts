@@ -2,6 +2,7 @@ export const utilService = {
 	debounce,
 	timeAgo,
 	makeId,
+	getFileDataUrl,
 };
 
 function makeId(length = 8) {
@@ -59,4 +60,18 @@ function timeAgo(input: Date | string | number) {
 			return time; //? time : 'Just now'
 		}
 	}
+}
+
+function getFileDataUrl(file: File) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onload = () => {
+			const dataUrl = reader.result;
+			resolve(dataUrl);
+		};
+		reader.onerror = error => {
+			reject(error);
+		};
+		reader.readAsDataURL(file);
+	});
 }

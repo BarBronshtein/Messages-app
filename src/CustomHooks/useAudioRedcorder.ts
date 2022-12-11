@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-
 enum RECORD_STATUS {
 	RECORDING = 'recording',
 	IDLE = 'idle',
