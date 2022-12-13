@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import { SET_MSG } from '../reducers/userMsgReducer';
-export function setUserMsg(msg: object) {
+import { SET_MSG, UserMsg } from '../reducers/userMsgReducer';
+export function setUserMsg(msg: UserMsg) {
 	return { type: SET_MSG, msg };
 }
 

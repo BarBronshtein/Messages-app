@@ -11,11 +11,12 @@ const PickFile = () => {
 		<>
 			<label
 				htmlFor="fileInput"
-				className="relative fa-solid fa-camera hover:bg-[#4444] hover:rounded-full p-2"
+				className="relative fa-solid fa-image hover:bg-[#4444] hover:rounded-full p-2 cursor-pointer"
 			></label>
 			<input
 				id="fileInput"
 				className="hidden"
+				accept="image/*,video/*"
 				onChange={ev => handleChange(ev)}
 				type="file"
 			/>

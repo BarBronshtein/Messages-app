@@ -10,7 +10,7 @@ const ChatArea = () => {
 	return (
 		<section className="grid grid-cols-[minmax(20vw,380px)_1fr]">
 			<ChatList />
-			{id ? <Chat className="p-8" /> : <DefaultChat />}
+			{id ? <Chat className="py-8" /> : <DefaultChat />}
 		</section>
 	);
 };

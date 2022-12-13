@@ -64,6 +64,8 @@ function timeAgo(input: Date | string | number) {
 
 function getFileDataUrl(file: File): Promise<string> {
 	if (file.size > 1348576) return Promise.reject('File is too large');
+	if (!file.type.startsWith('video') || !file.type.startsWith('image'))
+		return Promise.reject('File is not supported');
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.onload = ev => {

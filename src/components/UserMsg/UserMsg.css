@@ -1,7 +1,7 @@
 .user-msg.error,
 .user-msg.sucess {
 	opacity: 1;
-	transform: translate(-50px, -50px);
+	transform: translate(-150px, -150px) !important;
 }
 
 .user-msg.sucess {

@@ -4,7 +4,6 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { eventBus } from './services/eventBus.service';
 import Loader from './components/Loader/Loader';
 import UserMsg from './components/UserMsg/UserMsg';
-import PickFile from './components/Chat/ChatCmp/SendBar/SendBarCmp/PickFile';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/ChatList/ChatList'));
@@ -35,7 +34,6 @@ function App() {
 	}, []);
 	return (
 		<div className="main-app">
-			<PickFile />
 			<main className="min-h-screen">
 				<Suspense fallback={<Loader />}>
 					<Routes>

@@ -10,14 +10,14 @@ const UserMsg = () => {
 	return (
 		<section
 			className={`user-msg 
-			} text-xl fixed bottom-0 right-0 opacity-0 translate-x[150px] transition-transform ${
+			} text-xl fixed bottom-0 right-0 opacity-0 translate-x-[150px] transition-transform rounded p-2 ${
 				msg?.type ? msg.type : ''
 			} `}
 		>
 			<div className="user-msg-wrapper flex flex-col ">
 				<span>{msg?.txt}</span>
 				<button
-					className="user-msg-btn cursor-pointer text-center self-center rounded border-none p-2"
+					className="user-msg-btn cursor-pointer text-center bg-black self-center rounded border-none px-2 my-2"
 					onClick={onClearMsg}
 				>
 					Close
