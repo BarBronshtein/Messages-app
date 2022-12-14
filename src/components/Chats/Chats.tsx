@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { utilService } from '../../services/util.service';
-import ChatListHeader from './ChatListCmp/ChatListHeader';
-import ChatList from './ChatListCmp/ChatList';
-import SearchForm from './ChatListCmp/SearchForm';
+import ChatListHeader from './ChatsCmp/ChatListHeader';
+import ChatList from './ChatsCmp/ChatList';
+import SearchForm from './ChatsCmp/SearchForm';
 const Chats = () => {
 	useEffect(() => {
 		// dispatch(queryChats()) gives the last 10 chats

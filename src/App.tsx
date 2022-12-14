@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { eventBus } from './services/eventBus.service';
 import Loader from './components/Loader/Loader';
 import UserMsg from './components/UserMsg/UserMsg';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/Chats/Chats'));
