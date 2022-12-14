@@ -6,7 +6,7 @@ import Loader from './components/Loader/Loader';
 import UserMsg from './components/UserMsg/UserMsg';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
-const ChatList = lazy(() => import('./components/ChatList/ChatList'));
+const ChatList = lazy(() => import('./components/Chats/Chats'));
 const LoginForm = lazy(() => import('./pages/Login/Login'));
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit/ProfileEdit'));

@@ -1,8 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../Avatar';
-
-const ChatHeader = ({ className }: { className?: string }) => {
+type User = {
+	fullname: string;
+	photo?: string;
+	email: string;
+	bio?: string;
+	phone?: string;
+};
+const ChatHeader = ({
+	className,
+	user,
+}: {
+	className?: string;
+	user: User;
+}) => {
 	const sendTo = '/chats/';
 	return (
 		<header
@@ -12,8 +24,8 @@ const ChatHeader = ({ className }: { className?: string }) => {
 				<span className="fa-solid text-blue-600 fa-arrow-left cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			</Link>
 			<div className="flex grow ml-8">
-				<Avatar imgSize="sm" imgUrl="" />
-				<span className="ml-4">user fullname</span>
+				<Avatar imgSize="sm" imgUrl={user.photo || ''} />
+				<span className="ml-4">{user.fullname}</span>
 			</div>
 			<span className="fa-solid fa-circle-info text-blue-600 cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 		</header>

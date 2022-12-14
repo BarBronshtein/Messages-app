@@ -1,6 +1,6 @@
 import React from 'react';
 import Chat from '@/components/Chat/Chat';
-import ChatList from '@/components/ChatList/ChatList';
+import ChatList from '@/components/Chats/Chats';
 import { useParams } from 'react-router-dom';
 import DefaultChat from '@/components/Chat/ChatCmp/DefaultChat';
 

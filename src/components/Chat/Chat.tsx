@@ -6,7 +6,10 @@ import SendBar from './ChatCmp/SendBar/SendBar';
 const Chat = (props: { className?: string }) => {
 	return (
 		<section className="chat flex flex-col min-h-screen">
-			<ChatHeader className={props.className} />
+			<ChatHeader
+				user={{ email: 'i101', fullname: 'Barry Bravov', photo: '' }}
+				className={props.className}
+			/>
 			<MsgList
 				messages={[
 					{

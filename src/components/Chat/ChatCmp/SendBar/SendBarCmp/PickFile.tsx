@@ -11,7 +11,7 @@ const PickFile = () => {
 		<>
 			<label
 				htmlFor="fileInput"
-				className="relative fa-solid fa-image hover:bg-[#4444] hover:rounded-full p-2 cursor-pointer"
+				className="fa-solid h-fit fa-image hover:bg-[#4444] hover:rounded-full p-2 cursor-pointer"
 			></label>
 			<input
 				id="fileInput"
