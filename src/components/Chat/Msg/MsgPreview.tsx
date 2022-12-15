@@ -28,10 +28,10 @@ const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
 			}}
 		>
 			<div
-				className={`rounded-full w-fit col-start-${
+				className={`rounded-full w-fit ${
 					fromUser !== 'currentUser'
-						? '1 bg-gray-300'
-						: '2 text-right bg-blue-500 text-white justify-self-end'
+						? 'col-start-1 bg-gray-300'
+						: 'col-start-2 text-right bg-blue-500 text-white justify-self-end'
 				}`}
 			>
 				{!!type && <div> {markup}</div>}

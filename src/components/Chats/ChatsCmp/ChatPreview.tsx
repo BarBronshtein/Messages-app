@@ -9,7 +9,7 @@ type Props = {
 const ChatPreview = (props: Props) => {
 	return (
 		<Link to={`/chats/${props.chat.chatId}`}>
-			<div className="profile-preview rounded m-1 flex items-center cursor-pointer">
+			<div className="profile-preview rounded p-2 flex items-center cursor-pointer hover:bg-slate-200">
 				<Avatar imgSize="lg" imgUrl={props.chat.imgUrl} />
 				<div className="flex flex-col pl-3">
 					<h4>{props.chat.fullname}</h4>

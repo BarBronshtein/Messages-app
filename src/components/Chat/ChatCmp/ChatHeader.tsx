@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../Avatar';
-type User = {
+export type User = {
+	_id: string;
 	fullname: string;
 	photo?: string;
 	email: string;
 	bio?: string;
 	phone?: string;
 };
+
 const ChatHeader = ({
 	className,
 	user,

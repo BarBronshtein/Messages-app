@@ -10,7 +10,9 @@ export default defineConfig({
 			name: 'msg-app',
 			filename: 'remoteEntry.js',
 			remotes: {
-				auth: 'http://localhost:5050/assets/remoteEntry.js',
+				auth: import.meta.env
+					? import.meta.env.VITE_REMOTE_APP_URL
+					: 'https://pear-cautious-basket-clam.cyclic.app/assets/remoteEntry.js',
 			},
 		}),
 	],
