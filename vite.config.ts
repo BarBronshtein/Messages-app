@@ -11,7 +11,7 @@ export default defineConfig({
 			filename: 'remoteEntry.js',
 			remotes: {
 				auth: import.meta.env
-					? import.meta.env.VITE_REMOTE_APP_URL
+					? import.meta.env.VITE_REMOTE_ASSETS_APP_URL
 					: 'https://pear-cautious-basket-clam.cyclic.app/assets/remoteEntry.js',
 			},
 		}),

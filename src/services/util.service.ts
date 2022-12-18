@@ -2,7 +2,6 @@ export const utilService = {
 	debounce,
 	timeAgo,
 	makeId,
-	getFileDataUrl,
 };
 
 function makeId(length = 8) {
@@ -60,22 +59,4 @@ function timeAgo(input: Date | string | number) {
 			return time; //? time : 'Just now'
 		}
 	}
-}
-
-function getFileDataUrl(file: File): Promise<string> {
-	if (file.size > 1348576) return Promise.reject('File is too large');
-	if (!file.type.startsWith('video') || !file.type.startsWith('image'))
-		return Promise.reject('File is not supported');
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onload = ev => {
-			const dataUrl = ev.target?.result;
-
-			resolve(dataUrl as string);
-		};
-		reader.onerror = error => {
-			reject(error);
-		};
-		reader.readAsDataURL(file);
-	});
 }
