@@ -1,6 +1,6 @@
 import React from 'react';
 import ChatPreview from './ChatPreview';
-export type Chat = {
+export type ChatOption = {
 	fullname: string;
 	lastMsg?: { txt: string; timestamp: number };
 	imgUrl: string;
@@ -8,7 +8,7 @@ export type Chat = {
 	chatId: string;
 };
 type Props = {
-	chats: Chat[];
+	chats: ChatOption[];
 };
 const ChatList = (props: Props) => {
 	return (

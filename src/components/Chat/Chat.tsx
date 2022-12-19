@@ -7,7 +7,7 @@ const Chat = (props: { className?: string }) => {
 	return (
 		<section className="chat flex flex-col min-h-screen">
 			<ChatHeader
-				user={{ email: 'i101', fullname: 'Barry Bravov', photo: '' }}
+				user={{ email: 'i101', fullname: 'Barry Bravov', photo: '', _id: 'i111' }}
 				className={props.className}
 			/>
 			<MsgList

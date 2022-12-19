@@ -2,7 +2,8 @@ import { utilService } from '@/services/util.service';
 import { userService } from './user.service';
 import { Message } from '@/components/Chat/Msg/MsgPreview';
 import { httpService } from './http.service';
-type Chat = {
+import { User } from '@/components/Chat/ChatCmp/ChatHeader';
+export type Chat = {
 	_id: string;
 	messages: Message[];
 };
@@ -32,18 +33,21 @@ async function saveChat(data: Chat | string) {
 }
 
 async function addMessage(
-	message: { file: File | Blob; timestamp: number } & Message,
+	message: { file?: File | Blob; timestamp: number } & Message,
 	chatId: string
 ) {
-	const res = await httpService.put(`${BASE_URL}/api/chats/${chatId}`, message);
+	const res = await httpService.put(
+		`${BASE_URL}/api/chats/message/${chatId}`,
+		message
+	);
 	return res.data;
 }
 
-function getEmpyMessage() {
+function getEmpyMessage(txt = '') {
 	return <Message>{
 		id: utilService.makeId(),
-		fromUser: userService.getLoggedInUser(),
-		txt: '',
+		fromUser: (userService.getLoggedInUser() as User)._id,
+		txt,
 	};
 }
 
@@ -53,7 +57,7 @@ async function _updateChat(chat: Chat) {
 }
 
 async function _createChat(userId: string) {
-	const participants = [userId, userService.getLoggedInUser()];
+	const participants = [userId, (userService.getLoggedInUser() as User)._id];
 	const res = await httpService.post(`${BASE_URL}/api/chats`, participants);
 	return res.data;
 }

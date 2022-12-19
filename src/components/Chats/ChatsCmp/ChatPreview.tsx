@@ -2,9 +2,9 @@ import { utilService } from '@/services/util.service';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '@/components/Avatar';
-import { Chat } from './ChatList';
+import { ChatOption } from './ChatList';
 type Props = {
-	chat: Chat;
+	chat: ChatOption;
 };
 const ChatPreview = (props: Props) => {
 	return (
