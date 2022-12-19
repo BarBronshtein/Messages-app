@@ -1,5 +1,6 @@
 import Avatar from '@/components/Avatar';
-import { User } from '@/components/Chat/ChatCmp/ChatHeader';
+import { User } from '@/types';
+
 import React from 'react';
 type Props = {
 	user: User;

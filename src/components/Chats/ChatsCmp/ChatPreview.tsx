@@ -2,7 +2,8 @@ import { utilService } from '@/services/util.service';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '@/components/Avatar';
-import { ChatOption } from './ChatList';
+import { ChatOption } from '@/types';
+
 type Props = {
 	chat: ChatOption;
 };

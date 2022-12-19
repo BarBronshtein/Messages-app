@@ -1,11 +1,5 @@
+import { Message } from '@/types';
 import React from 'react';
-export type Message = {
-	id: string;
-	fromUser: string;
-	type?: 'video' | 'img' | 'audio';
-	url?: string;
-	txt: string;
-};
 
 const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
 	const loggedinUser = 'currentUser'; // Replace with session user once loggedinUser is implemented

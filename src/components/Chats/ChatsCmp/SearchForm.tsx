@@ -1,12 +1,13 @@
 import React, { FormEvent, useRef } from 'react';
 import { useFormRegister } from '@/CustomHooks/useFormRegister';
 import { utilService } from '@/services/util.service';
-import { User } from '@/components/Chat/ChatCmp/ChatHeader';
+
 import Contact from './Contact';
+import { User } from '@/types';
 
 const SearchForm = () => {
 	const getUsers = ({ txt }: { txt: string }) => {
-		// dispatch(queryUsers())
+		// dispatch(queryUsers(txt))
 	};
 	const onChangeInput = utilService.debounce(getUsers, 400);
 	const { register, resetForm } = useFormRegister({ txt: '' }, onChangeInput);

@@ -1,12 +1,8 @@
 import { utilService } from '@/services/util.service';
 import { userService } from './user.service';
-import { Message } from '@/components/Chat/Msg/MsgPreview';
 import { httpService } from './http.service';
-import { User } from '@/components/Chat/ChatCmp/ChatHeader';
-export type Chat = {
-	_id: string;
-	messages: Message[];
-};
+import { Chat, Message, User } from '@/types';
+
 export const chatService = {
 	getChats,
 	getChatById,
