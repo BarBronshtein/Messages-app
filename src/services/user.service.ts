@@ -1,5 +1,6 @@
+import { User } from '@/types';
 import axios from 'axios';
-import type { User } from '@/components/Chat/ChatCmp/ChatHeader';
+
 export const userService = {
 	getUsers,
 	getLoggedInUser,
@@ -7,7 +8,7 @@ export const userService = {
 
 const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL;
 
-async function getUsers(filterByName = null) {
+async function getUsers(filterByName = '') {
 	const res = await axios.get(BASE_URL + 'user');
 	const users = res.data;
 	if (filterByName) {
