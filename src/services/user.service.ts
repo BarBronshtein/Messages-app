@@ -9,7 +9,7 @@ export const userService = {
 const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL;
 
 async function getUsers(filterByName = '') {
-	const res = await axios.get(BASE_URL + 'user');
+	const res = await axios.get(BASE_URL + '/user');
 	const users = res.data;
 	if (filterByName) {
 		const regex = new RegExp(filterByName);

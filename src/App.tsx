@@ -21,7 +21,10 @@ function App() {
 
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
-		await axios.post(`${import.meta.env.VITE_AUTH_API_PROD_REMOTE}auth/logout`);
+		// await axios.post(`${import.meta.env.VITE_AUTH_API_PROD_REMOTE}/auth/logout`);
+		await axios.post(
+			`https://pear-cautious-basket-clam.cyclic.app/api/auth/logout`
+		);
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
 	};
@@ -51,7 +54,6 @@ function App() {
 									<Route path="/chats/:id" element={<ChatArea />} />
 								</>
 							)}
-
 							{isMobile && (
 								<>
 									<Route path="/chats" element={<ChatList />} />

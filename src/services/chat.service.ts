@@ -6,7 +6,8 @@ import { Chat, Message, User } from '@/types';
 export const chatService = {
 	getChats,
 	getChatById,
-	saveChat,
+	createChat,
+	updateChat,
 	getEmpyMessage,
 	addMessage,
 };
@@ -14,18 +15,16 @@ export const chatService = {
 const BASE_URL = import.meta.env.VITE_APP_URL;
 
 async function getChats() {
-	const res = await httpService.get(`${BASE_URL}/api/chats`);
+	const res = await httpService.get(
+		`${BASE_URL}/api/chats`,
+		userService.getLoggedInUser()
+	);
 	return res.data;
 }
 
 async function getChatById(chatId: string) {
 	const res = await httpService.get(`${BASE_URL}/api/chats/${chatId}`);
 	return res.data;
-}
-
-async function saveChat(data: Chat | string) {
-	if (typeof data === 'string') return await _createChat(data);
-	return await _updateChat(data);
 }
 
 async function addMessage(
@@ -47,13 +46,16 @@ function getEmpyMessage(txt = '') {
 	};
 }
 
-async function _updateChat(chat: Chat) {
-	const res = await httpService.put(`${BASE_URL}/api/chats/${chat._id}`, chat);
+async function updateChat(chat: Chat) {
+	const res = await httpService.put(`${BASE_URL}/api/chats/${chat._id}`, {
+		chat,
+		user: userService.getLoggedInUser(),
+	});
 	return res.data;
 }
 
-async function _createChat(userId: string) {
-	const participants = [userId, (userService.getLoggedInUser() as User)._id];
+async function createChat(user: User) {
+	const participants = [user, userService.getLoggedInUser() as User];
 	const res = await httpService.post(`${BASE_URL}/api/chats`, participants);
 	return res.data;
 }
