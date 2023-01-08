@@ -48,10 +48,11 @@ const MsgForm = () => {
 				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem]"></span>
 			</div>
 
-			{value && (
-				<button className="fa-solid fa-paper-plane  h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></button>
-			)}
-			{!value && (
+			{value ||
+				(file && (
+					<button className="fa-solid fa-paper-plane  h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></button>
+				))}
+			{!value && !file && (
 				<span className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}
 		</form>
