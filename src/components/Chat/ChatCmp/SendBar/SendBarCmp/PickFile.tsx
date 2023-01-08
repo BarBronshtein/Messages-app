@@ -1,8 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import FileToUrl from './FileToUrl';
-
-const PickFile = () => {
-	const [file, setFile] = useState<File | null>(null);
+type Props = {
+	file: null | File;
+	setFile: Function;
+};
+const PickFile = ({ file, setFile }: Props) => {
 	const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
 		const selectedFile = ev.target.files?.[0];
 		if (selectedFile) setFile(selectedFile);

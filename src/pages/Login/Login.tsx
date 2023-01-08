@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { LoginForm as mount } from 'auth/Login';
 import './Login.css';
 const LoginForm = () => {
 	const ref = useRef(null);
-	const [bool, useBool] = useState(true);
 	useEffect(() => {
 		mount(ref.current);
 	}, []);

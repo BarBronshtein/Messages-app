@@ -4,6 +4,9 @@ import { useAppDispatch } from '@/store/TypeHooks';
 import React, { useEffect, useState } from 'react';
 
 const FileToUrl = ({ file }: { file: File }) => {
+	const className =
+		'absolute max-w-[350px] bottom-14 object-contain h-[150px] left-[50%] translate-x-[-50%]';
+
 	const [url, setUrl] = useState<string | null>(null);
 	const dispatch = useAppDispatch();
 
@@ -30,22 +33,16 @@ const FileToUrl = ({ file }: { file: File }) => {
 	}, [file]);
 
 	if (file.type.startsWith('video/') && url)
-		return (
-			<video
-				className="absolute max-w-[300px] bottom-14"
-				controls
-				src={url}
-			></video>
-		);
+		return <video className={className} controls src={url}></video>;
 	if (file.type.startsWith('image/') && url)
-		return <img className="absolute max-w-[300px] bottom-14" src={url} alt="" />;
+		return <img className={className} src={url} alt="" />;
 	if (url === null)
 		return (
-			<div className="relative">
+			<div className={className}>
 				<Loader />;
 			</div>
 		);
-	return <div className="absolute top-8">File is not supported</div>;
+	return <div className="absolute bottom-14">File is not supported</div>;
 };
 
 export default FileToUrl;

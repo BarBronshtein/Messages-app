@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormRegister } from '@/CustomHooks/useFormRegister';
 import AudioRecorder from '../ChatCmp/SendBar/SendBarCmp/AudioRecorder';
 import PickFile from '../ChatCmp/SendBar/SendBarCmp/PickFile';
+import { chatService } from '@/services/chat.service';
 
 const MsgForm = () => {
-	const [isTexting, setIsTexting] = useState(false);
+	const [file, setFile] = useState<File | null>(null);
+
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
+
 	const { register, resetForm } = useFormRegister({ msg: '' }, () => {});
 	const { value } = register('msg');
 	const auto_height = (el: HTMLTextAreaElement) => {
@@ -15,24 +18,23 @@ const MsgForm = () => {
 		if (parseInt(el.style.height) > 225) el.style.overflowY = 'scroll';
 		else el.style.overflowY = 'hidden';
 	};
-	useEffect(() => {
-		if (!isTexting && value) return setIsTexting(true);
-		if (isTexting && !value) return setIsTexting(false);
-	}, [value]);
+
 	return (
 		<form
 			className="w-full flex relative"
 			onSubmit={ev => {
 				ev.preventDefault();
 				// Disptach event to add a message
+				const message = chatService.getEmpyMessage(value);
+				chatService.addMessage({ ...message, timestamp: Date.now(), file }, '123');
 				resetForm();
 			}}
 		>
-			{!isTexting && <AudioRecorder />}
-			{isMobile && !isTexting && (
+			{!value && <AudioRecorder />}
+			{isMobile && !value && (
 				<span className="fa-solid fa-camera h-fit hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}
-			<PickFile />
+			<PickFile file={file} setFile={setFile} />
 			<div className="input-group relative grow">
 				<textarea
 					cols={20}
@@ -46,7 +48,7 @@ const MsgForm = () => {
 				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem]"></span>
 			</div>
 
-			{isTexting && (
+			{value && (
 				<button className="flex">
 					<svg
 						stroke="currentColor"
@@ -61,7 +63,7 @@ const MsgForm = () => {
 					</svg>
 				</button>
 			)}
-			{!isTexting && (
+			{!value && (
 				<span className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}
 		</form>

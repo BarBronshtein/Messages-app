@@ -12,7 +12,7 @@ export default defineConfig({
 			remotes: {
 				auth: import.meta.env
 					? import.meta.env.VITE_REMOTE_ASSETS_APP_URL
-					: 'https://pear-cautious-basket-clam.cyclic.app/assets/remoteEntry.js',
+					: 'https://d13brhpf8ykarf.cloudfront.net/assets/remoteEntry.js',
 			},
 		}),
 	],
