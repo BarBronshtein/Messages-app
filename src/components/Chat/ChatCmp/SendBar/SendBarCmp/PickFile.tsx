@@ -22,7 +22,7 @@ const PickFile = ({ file, setFile }: Props) => {
 				onChange={ev => handleChange(ev)}
 				type="file"
 			/>
-			{!!file && <FileToUrl file={file} />}
+			{!!file && <FileToUrl clearFile={() => setFile(null)} file={file} />}
 		</>
 	);
 };

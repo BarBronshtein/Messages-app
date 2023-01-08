@@ -30,7 +30,7 @@ const MsgForm = () => {
 				resetForm();
 			}}
 		>
-			{!value && <AudioRecorder />}
+			{!value && !file && <AudioRecorder />}
 			{isMobile && !value && (
 				<span className="fa-solid fa-camera h-fit hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}
@@ -49,19 +49,7 @@ const MsgForm = () => {
 			</div>
 
 			{value && (
-				<button className="flex">
-					<svg
-						stroke="currentColor"
-						fill="currentColor"
-						strokeWidth="0"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-						className="h-4 relative top-3 sm:h-5 sm:top-2 cursor-pointer hover:bg-[#4444] rounded-3xl"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"></path>
-					</svg>
-				</button>
+				<button className="fa-solid fa-paper-plane  h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></button>
 			)}
 			{!value && (
 				<span className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>

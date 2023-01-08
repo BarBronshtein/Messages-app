@@ -9,7 +9,6 @@ const AudioRecorder = () => {
 	useEffect(() => {
 		if (!audioResult) return;
 		console.log(audioResult);
-		const src = URL.createObjectURL(audioResult);
 		// Do something
 		// messages.push({ type: 'audio', id: utilService.makeId() });
 	}, [audioResult]);
@@ -23,7 +22,7 @@ const AudioRecorder = () => {
 				onMouseUp={() => stopRecording()}
 				className={`fa-solid fa-microphone ${
 					status === 'idle' ? '' : 'blink'
-				} cursor-pointer hover:bg-[#4444] hover:rounded-full p-2`}
+				} cursor-pointer hover:bg-[#4444] hover:rounded-full h-fit p-2`}
 			></span>
 			<AudioFile audio={audioResult} />
 		</>

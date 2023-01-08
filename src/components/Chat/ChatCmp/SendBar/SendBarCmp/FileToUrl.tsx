@@ -3,9 +3,17 @@ import { setUserMsg } from '@/store/actions/userMsgActions';
 import { useAppDispatch } from '@/store/TypeHooks';
 import React, { useEffect, useState } from 'react';
 
-const FileToUrl = ({ file }: { file: File }) => {
-	const className =
-		'absolute max-w-[350px] bottom-14 object-contain h-[150px] left-[50%] translate-x-[-50%]';
+const FileToUrl = ({
+	file,
+	clearFile,
+}: {
+	file: File;
+	clearFile: Function;
+}) => {
+	const divClassName = 'absolute bottom-14 left-[50%] translate-x-[-50%]';
+	const spanClassName =
+		'fa-solid cursor-pointer fa-times absolute bottom-32 right-[-15%]';
+	const className = 'max-w-[350px] object-contain h-[150px]';
 
 	const [url, setUrl] = useState<string | null>(null);
 	const dispatch = useAppDispatch();
@@ -23,7 +31,7 @@ const FileToUrl = ({ file }: { file: File }) => {
 				data: { type, data },
 			} = ev;
 			if (type === 'success') return setUrl(data);
-			setUrl('');
+			clearFile();
 			return dispatch(setUserMsg({ type: 'error', txt: data }));
 		};
 
@@ -33,12 +41,22 @@ const FileToUrl = ({ file }: { file: File }) => {
 	}, [file]);
 
 	if (file.type.startsWith('video/') && url)
-		return <video className={className} controls src={url}></video>;
+		return (
+			<div className={divClassName}>
+				<video className={className} controls src={url}></video>
+				<span onClick={() => clearFile()} className={spanClassName}></span>
+			</div>
+		);
 	if (file.type.startsWith('image/') && url)
-		return <img className={className} src={url} alt="" />;
+		return (
+			<div className={divClassName}>
+				<img className={className} src={url} alt="" />
+				<span onClick={() => clearFile()} className={spanClassName}></span>
+			</div>
+		);
 	if (url === null)
 		return (
-			<div className={className}>
+			<div className={divClassName}>
 				<Loader />;
 			</div>
 		);
