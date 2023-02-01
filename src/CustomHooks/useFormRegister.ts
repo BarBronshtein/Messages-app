@@ -29,6 +29,5 @@ export const useFormRegister = <T>(initialState: T, cb: Function) => {
 	const resetForm = () => {
 		setFields(() => initialState);
 	};
-	// return [register,resetForm]
 	return { register, resetForm };
 };

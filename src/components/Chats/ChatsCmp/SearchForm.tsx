@@ -1,13 +1,20 @@
-import React, { FormEvent, useRef } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { useFormRegister } from '@/CustomHooks/useFormRegister';
 import { utilService } from '@/services/util.service';
 
 import Contact from './Contact';
 import { User } from '@/types';
+import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
+import { getContacts } from '@/store/actions/chatActions';
 
 const SearchForm = () => {
+	const dispatch = useAppDispatch();
+	const [controller, setController] = useState<AbortController>(null!);
 	const getUsers = ({ txt }: { txt: string }) => {
-		// dispatch(queryUsers(txt))
+		if (controller) controller.abort();
+		const newController = new AbortController();
+		setController(newController);
+		dispatch(getContacts(txt, newController.signal));
 	};
 	const onChangeInput = utilService.debounce(getUsers, 400);
 	const { register, resetForm } = useFormRegister({ txt: '' }, onChangeInput);
@@ -16,7 +23,7 @@ const SearchForm = () => {
 		e.preventDefault();
 	};
 
-	const userOptions: null | User[] = null; // should be a taken from redux state
+	const userOptions = useAppSelector(state => state.chatReducer.contacts);
 	return (
 		<form
 			onSubmit={onSubmit}

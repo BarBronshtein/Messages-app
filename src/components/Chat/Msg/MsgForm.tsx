@@ -3,8 +3,15 @@ import { useFormRegister } from '@/CustomHooks/useFormRegister';
 import AudioRecorder from '../ChatCmp/SendBar/SendBarCmp/AudioRecorder';
 import PickFile from '../ChatCmp/SendBar/SendBarCmp/PickFile';
 import { chatService } from '@/services/chat.service';
+import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
+import { addMessage } from '@/store/actions/chatActions';
+import { utilService } from '@/services/util.service';
+import { Chat } from '@/types';
 
 const MsgForm = () => {
+	const dispatch = useAppDispatch();
+	const { curChat } = useAppSelector(state => state.chatReducer);
+
 	const [file, setFile] = useState<File | null>(null);
 
 	const isMobile =
@@ -24,9 +31,18 @@ const MsgForm = () => {
 			className="w-full flex relative"
 			onSubmit={ev => {
 				ev.preventDefault();
-				// Disptach event to add a message
 				const message = chatService.getEmpyMessage(value);
-				chatService.addMessage({ ...message, timestamp: Date.now(), file }, '123');
+				dispatch(
+					addMessage(
+						{
+							...message,
+							file,
+							type: file?.type.startsWith('video/') ? 'video' : 'img',
+							timestamp: Date.now(),
+						},
+						(curChat as Chat)._id
+					)
+				);
 				resetForm();
 			}}
 		>
@@ -48,10 +64,11 @@ const MsgForm = () => {
 				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem]"></span>
 			</div>
 
-			{value ||
-				(file && (
-					<button className="fa-solid fa-paper-plane  h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></button>
-				))}
+			{value || file ? (
+				<button className="fa-solid fa-paper-plane  h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></button>
+			) : (
+				''
+			)}
 			{!value && !file && (
 				<span className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			)}

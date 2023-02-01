@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const NotFound = () => {
+const NotFound = ({ error }: { error?: boolean }) => {
 	const scareCrowImg =
 		'https://raw.githubusercontent.com/BarBronshtein/Bar-Bronshtein-19-10-22/main/src/assets/imgs/Scarecrow.png';
 	return (
 		<section className="not-found container px-4 m-auto grid-cols-3 min-h-screen">
 			<header className="main-header py-5 lg:py-10">
-				<h3 className="uppercase text-2xl leading-6 font-bold ">404 not found</h3>
+				<h3 className="uppercase text-2xl leading-6 font-bold ">
+					{error ? 'Something went wrong...' : '404 not found'}
+				</h3>
 			</header>
 			<section className="main-content lg:flex">
 				<div className="img-container md:flex justify-center">

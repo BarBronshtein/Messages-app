@@ -13,7 +13,7 @@ type Action = {
 	msg: UserMsg | null;
 };
 
-export function userMsgReducer(state = INITIAL_STATE, action: Action) {
+export const userMsgReducer = (state = INITIAL_STATE, action: Action) => {
 	switch (action.type) {
 		case SET_MSG:
 			return {
@@ -23,4 +23,4 @@ export function userMsgReducer(state = INITIAL_STATE, action: Action) {
 		default:
 			return state;
 	}
-}
+};

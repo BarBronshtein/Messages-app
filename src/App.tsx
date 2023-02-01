@@ -6,6 +6,7 @@ import Loader from './components/Loader/Loader';
 import UserMsg from './components/UserMsg/UserMsg';
 import { UserRoutes } from './routes/UserRoutes';
 import { GuestRoute } from './routes/GuestRoute';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
 const ChatList = lazy(() => import('./components/Chats/Chats'));
@@ -40,31 +41,33 @@ function App() {
 	return (
 		<div className="main-app">
 			<main className="min-h-screen">
-				<Suspense fallback={<Loader />}>
-					<Routes>
-						<Route element={<GuestRoute />}>
-							<Route path="/" element={<LoginForm />} />
-						</Route>
-						<Route element={<UserRoutes />}>
-							<Route path="/personal-info" element={<Profile />} />
-							<Route path="/personal-info/edit" element={<ProfileEdit />} />
-							{!isMobile && (
-								<>
-									<Route path="/chats" element={<ChatArea />} />
-									<Route path="/chats/:id" element={<ChatArea />} />
-								</>
-							)}
-							{isMobile && (
-								<>
-									<Route path="/chats" element={<ChatList />} />
-									<Route path="/chats/:id" element={<Chat />} />
-								</>
-							)}
-						</Route>
+				<ErrorBoundary>
+					<Suspense fallback={<Loader />}>
+						<Routes>
+							<Route element={<GuestRoute />}>
+								<Route path="/" element={<LoginForm />} />
+							</Route>
+							<Route element={<UserRoutes />}>
+								<Route path="/personal-info" element={<Profile />} />
+								<Route path="/personal-info/edit" element={<ProfileEdit />} />
+								{!isMobile && (
+									<>
+										<Route path="/chats" element={<ChatArea />} />
+										<Route path="/chats/:id" element={<ChatArea />} />
+									</>
+								)}
+								{isMobile && (
+									<>
+										<Route path="/chats" element={<ChatList />} />
+										<Route path="/chats/:id" element={<Chat />} />
+									</>
+								)}
+							</Route>
 
-						<Route path="*" element={<NotFound />} />
-					</Routes>
-				</Suspense>
+							<Route path="*" element={<NotFound />} />
+						</Routes>
+					</Suspense>
+				</ErrorBoundary>
 			</main>
 			<UserMsg />
 		</div>

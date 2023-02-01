@@ -2,15 +2,27 @@ import { useAudioRecorder } from '@/CustomHooks/useAudioRedcorder';
 import './AudioRecorder.css';
 import React, { useEffect } from 'react';
 import AudioFile from './AudioFile';
+import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
+import { chatService } from '@/services/chat.service';
+import { addMessage } from '@/store/actions/chatActions';
+import { Chat } from '@/types';
 
 const AudioRecorder = () => {
+	const dispatch = useAppDispatch();
+	const { curChat } = useAppSelector(state => state.chatReducer);
 	const { startRecording, stopRecording, audioResult, status } =
 		useAudioRecorder();
 	useEffect(() => {
 		if (!audioResult) return;
 		console.log(audioResult);
 		// Do something
-		// messages.push({ type: 'audio', id: utilService.makeId() });
+		const message = chatService.getEmpyMessage();
+		dispatch(
+			addMessage(
+				{ ...message, file: audioResult, timestamp: Date.now() },
+				(curChat as Chat)._id
+			)
+		);
 	}, [audioResult]);
 	return (
 		<>

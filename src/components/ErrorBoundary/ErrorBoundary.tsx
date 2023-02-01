@@ -1,5 +1,5 @@
 import React from 'react';
-
+import NotFound from '@/pages/NotFound/NotFound';
 class ErrorBoundary extends React.Component<
 	{ children: React.ReactNode },
 	{ hasError: boolean }
@@ -11,7 +11,8 @@ class ErrorBoundary extends React.Component<
 
 	static getDerivedStateFromError(error: Error) {
 		// Update state so the next render will show the fallback UI.
-		return { hasError: true };
+
+		return { hasError: true, msg: { txt: error.message, name: error.name } };
 	}
 
 	componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
@@ -23,7 +24,7 @@ class ErrorBoundary extends React.Component<
 	render() {
 		if (this.state.hasError) {
 			// You can render any custom fallback UI
-			return <h1>Something went wrong.</h1>;
+			return <NotFound error />;
 		}
 
 		return this.props.children;
