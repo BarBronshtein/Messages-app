@@ -1,15 +1,11 @@
+import { useAppSelector } from '@/store/TypeHooks';
 import { User } from '@/types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../Avatar';
 
-const ChatHeader = ({
-	className,
-	user,
-}: {
-	className?: string;
-	user: User;
-}) => {
+const ChatHeader = ({ className }: { className?: string }) => {
+	const user = useAppSelector(state => state.chatReducer.curContact);
 	const sendTo = '/chats/';
 	return (
 		<header
@@ -19,8 +15,8 @@ const ChatHeader = ({
 				<span className="fa-solid text-blue-600 fa-arrow-left cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 			</Link>
 			<div className="flex grow ml-8">
-				<Avatar imgSize="sm" imgUrl={user.photo || ''} />
-				<span className="ml-4">{user.fullname}</span>
+				<Avatar imgSize="sm" imgUrl={user?.photo || ''} />
+				<span className="ml-4">{user?.fullname}</span>
 			</div>
 			<span className="fa-solid fa-circle-info text-blue-600 cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
 		</header>

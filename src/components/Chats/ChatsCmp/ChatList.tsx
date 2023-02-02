@@ -9,7 +9,7 @@ const ChatList = (props: Props) => {
 	return (
 		<div className="grow">
 			{props.chats.map(chat => (
-				<ChatPreview key={chat._id} chat={chat} />
+				<ChatPreview key={chat.chatId} chat={chat} />
 			))}
 		</div>
 	);

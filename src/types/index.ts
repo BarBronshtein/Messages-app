@@ -9,9 +9,11 @@ export enum ChatActionTypes {
 	SET_CHATS = 'SET_CHATS',
 	SET_CUR_CHAT = 'SET_CUR_CHAT',
 	ADD_MESSAGE = 'ADD_MESSAGE',
+	SET_CUR_CONTACT = 'SET_CUR_CONTACT',
 }
 export interface ChatState {
 	curChat: Chat | null;
 	contacts: User[] | null;
 	chats: ChatOption[] | null;
+	curContact: null | User;
 }

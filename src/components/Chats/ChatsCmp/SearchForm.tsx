@@ -5,25 +5,33 @@ import { utilService } from '@/services/util.service';
 import Contact from './Contact';
 import { User } from '@/types';
 import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
-import { getContacts } from '@/store/actions/chatActions';
+import { clearContacts, getContacts } from '@/store/actions/chatActions';
 
 const SearchForm = () => {
 	const dispatch = useAppDispatch();
+	const userOptions = useAppSelector(state => state.chatReducer.contacts);
+
 	const [controller, setController] = useState<AbortController>(null!);
+
+	const clear = (): any => dispatch(clearContacts());
+
 	const getUsers = ({ txt }: { txt: string }) => {
+		if (!txt) clear();
 		if (controller) controller.abort();
 		const newController = new AbortController();
 		setController(newController);
 		dispatch(getContacts(txt, newController.signal));
 	};
+
 	const onChangeInput = utilService.debounce(getUsers, 400);
+
 	const { register, resetForm } = useFormRegister({ txt: '' }, onChangeInput);
+
 	const ref = useRef<HTMLInputElement | null>(null);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
 	};
 
-	const userOptions = useAppSelector(state => state.chatReducer.contacts);
 	return (
 		<form
 			onSubmit={onSubmit}
@@ -44,14 +52,17 @@ const SearchForm = () => {
 				<span
 					onClick={ev => {
 						ev.stopPropagation();
-						console.log('here');
+						clearContacts();
 						resetForm();
 					}}
 					className="fa-solid fa-times absolute cursor-pointer top-[2.35rem] right-8 text-gray-400"
 				></span>
 			)}
+
 			{userOptions &&
-				userOptions.map((user: User) => <Contact key={user._id} user={user} />)}
+				userOptions.map((user: User) => (
+					<Contact key={user._id} user={user} clearContacts={clear} />
+				))}
 		</form>
 	);
 };

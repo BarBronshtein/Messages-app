@@ -40,7 +40,7 @@ const MsgForm = () => {
 							type: file?.type.startsWith('video/') ? 'video' : 'img',
 							timestamp: Date.now(),
 						},
-						(curChat as Chat)._id
+						(curChat as Chat)?._id
 					)
 				);
 				resetForm();

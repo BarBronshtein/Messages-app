@@ -3,7 +3,7 @@ import { SET_MSG, UserMsg } from './../reducers/userMsgReducer';
 import { ChatAction } from './../reducers/chatReducer';
 import { userService } from './../../services/user.service';
 import { setUserMsg } from './userMsgActions';
-import { ChatActionTypes, Message } from '@/types';
+import { ChatActionTypes, Message, User } from '@/types';
 import { Dispatch, Action } from 'redux';
 import { chatService } from '@/services/chat.service';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
@@ -22,7 +22,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 
 export const getContacts = (txt: string, signal: AbortSignal): any => {
 	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
-		if (!txt) return;
+		if (!txt) return dispatch(clearContacts());
 		try {
 			const contacts = await userService.getUsers(txt, signal);
 			dispatch({ type: ChatActionTypes.SET_CONTACTS, payload: contacts });
@@ -79,4 +79,24 @@ export const addMessage = (
 			dispatch(setUserMsg({ type: 'error', txt: 'Failed to get data' }));
 		}
 	};
+};
+
+export const addChat = (user: User): any => {
+	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
+		try {
+			const chatId = await chatService.createChat(user);
+			return chatId;
+		} catch (err) {
+			console.error(err);
+			dispatch(setUserMsg({ type: 'error', txt: 'Failed to get data' }));
+		}
+	};
+};
+
+export const setContact = (user: User) => {
+	return { type: ChatActionTypes.SET_CUR_CONTACT, payload: user };
+};
+
+export const clearContact = (user: User) => {
+	return { type: ChatActionTypes.SET_CUR_CONTACT, payload: null };
 };

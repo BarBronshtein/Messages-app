@@ -32,6 +32,7 @@ function debounce(func: (...args: any[]) => void, wait = 500) {
 }
 
 function timeAgo(input: Date | string | number) {
+	if (!input) return '';
 	const date = input instanceof Date ? input : new Date(+input);
 	const formatter = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
 

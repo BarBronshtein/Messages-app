@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { Reducer } from 'react';
-import { Chat, ChatActionTypes, ChatState, User } from '@/types';
+import { ChatActionTypes, ChatState } from '@/types';
 
 const INITIAL_STATE: ChatState = {
+	curContact: null,
 	curChat: null,
 	contacts: null,
 	chats: null,
@@ -17,6 +18,11 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 			return <ChatState>{
 				...state,
 				chats: action.payload,
+			};
+		case ChatActionTypes.SET_CUR_CONTACT:
+			return <ChatState>{
+				...state,
+				curContact: action.payload,
 			};
 		case ChatActionTypes.SET_CONTACTS:
 			return <ChatState>{

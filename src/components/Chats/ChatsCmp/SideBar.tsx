@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useLocation } from 'react-router-dom';
 import Avatar from '@/components/Avatar';
 import ProfileModal from '@/components/ProfileModal/ProfileModal';
+import { userService } from '@/services/user.service';
 
 type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };
@@ -49,12 +50,16 @@ const SideBar = ({ isShown, onClose }: Props) => {
 	return ReactDOM.createPortal(
 		<aside ref={ref} className={className}>
 			<header className="flex relative justify-between items-center px-4 py-3">
-				<Avatar imgUrl="" imgSize="sm" className="cursor-pointer" />
+				<Avatar
+					imgUrl={userService.getLoggedInUser().photo}
+					imgSize="sm"
+					className="cursor-pointer"
+				/>
 				<h4
 					className="grow ml-12 cursor-pointer"
 					onClick={() => setIsOpen(prev => !prev)}
 				>
-					User fullname{' '}
+					{userService.getLoggedInUser().fullname}{' '}
 					<i className={`fa-solid fa-chevron-${isOpen ? 'down' : 'up'}`}></i>
 				</h4>
 				<span

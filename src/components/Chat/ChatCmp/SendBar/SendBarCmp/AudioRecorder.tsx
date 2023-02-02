@@ -14,12 +14,11 @@ const AudioRecorder = () => {
 		useAudioRecorder();
 	useEffect(() => {
 		if (!audioResult) return;
-		console.log(audioResult);
 		// Do something
 		const message = chatService.getEmpyMessage();
 		dispatch(
 			addMessage(
-				{ ...message, file: audioResult, timestamp: Date.now() },
+				{ ...message, file: audioResult, type: 'audio', timestamp: Date.now() },
 				(curChat as Chat)._id
 			)
 		);

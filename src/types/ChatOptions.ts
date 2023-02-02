@@ -1,7 +1,5 @@
 export type ChatOption = {
-	fullname: string;
+	user: { fullname: string; imgUrl: string; _id: string }[];
 	lastMsg?: { txt: string; timestamp: number };
-	imgUrl: string;
-	_id: string;
 	chatId: string;
 };

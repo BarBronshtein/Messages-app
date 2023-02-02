@@ -9,13 +9,16 @@ export const userService = {
 const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL;
 
 async function getUsers(filterByName = '', signal: AbortSignal) {
-	const res = await axios.get(BASE_URL + '/user', { signal });
+	const res = await axios.get(BASE_URL + '/api/user', { signal });
 	const users = res.data;
 	if (filterByName) {
 		const regex = new RegExp(filterByName, 'i');
-		return users.filter((user: User) => user.fullname.match(regex));
+		return users.filter(
+			(user: User) =>
+				user.fullname.match(regex) && user._id !== getLoggedInUser()._id
+		);
 	}
-	return users;
+	return users.filter((user: User) => user._id !== getLoggedInUser()._id);
 }
 
 function getLoggedInUser() {
