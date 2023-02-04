@@ -23,9 +23,7 @@ function App() {
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
 		// await axios.post(`${import.meta.env.VITE_AUTH_API_PROD_REMOTE}/auth/logout`);
-		await axios.post(
-			`https://pear-cautious-basket-clam.cyclic.app/api/auth/logout`
-		);
+		await axios.post(`https://chattyapp.lol/api/auth/logout`);
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
 	};

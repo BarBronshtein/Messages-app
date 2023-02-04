@@ -24,10 +24,14 @@ async function getChats() {
 	}
 }
 
-async function getChatById(chatId: string) {
+async function getChatById(chatId: string, signal: AbortSignal) {
 	try {
-		const res = await httpService.get(`${BASE_URL}/api/chat/${chatId}`);
-		return res.data;
+		const res = await httpService.get(
+			`${BASE_URL}/api/chat/${chatId}`,
+			{},
+			signal
+		);
+		return res;
 	} catch (err) {
 		console.log(err);
 		throw new Error(`Failed to get chat ${chatId} try again later`);
@@ -57,7 +61,7 @@ async function addMessage(
 			`${BASE_URL}/api/chat/message/${chatId}`,
 			message
 		);
-		return res.data;
+		return res;
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to add message try again later');

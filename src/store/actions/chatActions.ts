@@ -53,10 +53,10 @@ export const getChatOptions = (): any => {
 	};
 };
 
-export const setChat = (chatId: string): any => {
+export const setChat = (chatId: string, signal: AbortSignal): any => {
 	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
 		try {
-			const chat = await chatService.getChatById(chatId);
+			const chat = await chatService.getChatById(chatId, signal);
 			dispatch({ type: ChatActionTypes.SET_CUR_CHAT, payload: chat });
 		} catch (err) {
 			console.error(err);
@@ -72,8 +72,8 @@ export const addMessage = (
 	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
 		try {
 			message.timestamp = Date.now();
-			const chat = await chatService.addMessage(message, chatId);
-			dispatch({ type: ChatActionTypes.ADD_MESSAGE, payload: chat });
+			const addedMessage = await chatService.addMessage(message, chatId);
+			dispatch({ type: ChatActionTypes.ADD_MESSAGE, payload: addedMessage });
 		} catch (err) {
 			console.error(err);
 			dispatch(setUserMsg({ type: 'error', txt: 'Failed to get data' }));
@@ -93,8 +93,13 @@ export const addChat = (user: User): any => {
 	};
 };
 
-export const setContact = (user: User) => {
-	return { type: ChatActionTypes.SET_CUR_CONTACT, payload: user };
+export const getContactById = (userId: string): any => {
+	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
+		try {
+			const contact = await userService.getUserById(userId);
+			dispatch({ type: ChatActionTypes.SET_CUR_CONTACT, payload: contact });
+		} catch (err) {}
+	};
 };
 
 export const clearContact = (user: User) => {

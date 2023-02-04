@@ -1,5 +1,7 @@
+import { User } from './User';
+
 export type ChatOption = {
-	user: { fullname: string; imgUrl: string; _id: string }[];
+	user: User[];
 	lastMsg?: { txt: string; timestamp: number };
 	chatId: string;
 };

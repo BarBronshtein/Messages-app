@@ -11,7 +11,6 @@ import { Chat } from '@/types';
 const MsgForm = () => {
 	const dispatch = useAppDispatch();
 	const { curChat } = useAppSelector(state => state.chatReducer);
-
 	const [file, setFile] = useState<File | null>(null);
 
 	const isMobile =
@@ -32,15 +31,15 @@ const MsgForm = () => {
 			onSubmit={ev => {
 				ev.preventDefault();
 				const message = chatService.getEmpyMessage(value);
+				const type = file
+					? file.type.startsWith('image/')
+						? 'img'
+						: 'video'
+					: undefined;
 				dispatch(
 					addMessage(
-						{
-							...message,
-							file,
-							type: file?.type.startsWith('video/') ? 'video' : 'img',
-							timestamp: Date.now(),
-						},
-						(curChat as Chat)?._id
+						{ ...message, file, timestamp: Date.now(), type },
+						(curChat as Chat)._id
 					)
 				);
 				resetForm();

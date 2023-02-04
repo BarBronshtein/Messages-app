@@ -1,5 +1,5 @@
 import Avatar from '@/components/Avatar';
-import { addChat, setContact } from '@/store/actions/chatActions';
+import { addChat } from '@/store/actions/chatActions';
 import { useAppDispatch } from '@/store/TypeHooks';
 import { User } from '@/types';
 
@@ -18,11 +18,10 @@ const Contact = (props: Props) => {
 		dispatch(addChat(user)).then((chatId: string) =>
 			navigate(`/chats/${chatId}`)
 		);
-		dispatch(setContact(props.user));
 	};
 	return (
 		<div
-			className="absolute w-full z-5 rounded flex items-center cursor-pointer p-2 hover:bg-slate-200 bg-white"
+			className="w-full py-6 z-5 rounded flex items-center cursor-pointer p-2 hover:bg-slate-200 bg-white"
 			onClick={() => onClick(props.user)}
 		>
 			<Avatar imgSize="lg" imgUrl={props.user.photo || ''} />

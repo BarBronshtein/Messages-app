@@ -1,14 +1,16 @@
+import { userService } from '@/services/user.service';
 import { Message } from '@/types';
 import React from 'react';
 
-const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
-	const loggedinUser = 'currentUser'; // Replace with session user once loggedinUser is implemented
-	const urlRegex =
-		/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
+	const loggedinUser = userService.getLoggedInUser(); // Replace with session user once loggedinUser is implemented
+	const urlRegex = new RegExp(
+		'^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|(www\\.)?){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'
+	);
 	const words = txt.split(' ');
 	const types = {
-		video: <video controls src={url}></video>,
-		img: <img src={url} />,
+		video: <video className="rounded-lg" controls src={url}></video>,
+		img: <img className="rounded-lg" src={url} />,
 		audio: <audio controls src={url}></audio>,
 	};
 
@@ -16,25 +18,44 @@ const MsgPreview = ({ txt, url, type, fromUser }: Message) => {
 
 	return (
 		<div
-			className="msg grid"
+			className="msg grid py-2"
 			style={{
-				gridTemplateColumns: fromUser !== loggedinUser ? '300px 1fr' : '1fr 300px',
+				gridTemplateColumns:
+					fromUser !== loggedinUser._id ? '300px 1fr' : '1fr 300px',
 			}}
 		>
 			<div
-				className={`rounded-full w-fit ${
-					fromUser !== 'currentUser'
-						? 'col-start-1 bg-gray-300'
-						: 'col-start-2 text-right bg-blue-500 text-white justify-self-end'
+				className={`w-fit ${
+					fromUser !== loggedinUser._id
+						? 'col-start-1 '
+						: 'col-start-2 text-righ text-white justify-self-end'
 				}`}
 			>
-				{!!type && <div> {markup}</div>}
-				<p className="p-3">
-					{words.map(word =>
-						word.match(urlRegex) ? <a href={word}>{word + ' '}</a> : word + ' '
-					)}
-				</p>
+				{!!type && <div>{markup}</div>}
+				{txt && (
+					<p
+						className={`p-3 rounded-full ${
+							fromUser !== loggedinUser._id ? 'bg-gray-300' : 'bg-blue-500'
+						}`}
+					>
+						{words.map((word, i) =>
+							word.match(urlRegex) ? (
+								<a
+									key={word + i + id}
+									target="_blank"
+									className="underline"
+									href={word}
+								>
+									{word + ' '}
+								</a>
+							) : (
+								<span key={word + i + id}>{word + ' '}</span>
+							)
+						)}
+					</p>
+				)}
 			</div>
+			{/* {!!type && <div> {markup}</div>} */}
 		</div>
 	);
 };

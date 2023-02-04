@@ -1,3 +1,4 @@
+import { Chat } from './../../types/Chat';
 import { Action } from 'redux';
 import { Reducer } from 'react';
 import { ChatActionTypes, ChatState } from '@/types';
@@ -37,7 +38,10 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 		case ChatActionTypes.ADD_MESSAGE:
 			return <ChatState>{
 				...state,
-				curChat: action.payload,
+				curChat: {
+					...state.curChat,
+					messages: [...(state.curChat as Chat).messages, action.payload],
+				},
 			};
 		default:
 			return state;

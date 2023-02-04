@@ -7,7 +7,7 @@ type Props = {
 };
 const ChatList = (props: Props) => {
 	return (
-		<div className="grow">
+		<div className="grow overflow-y-auto">
 			{props.chats.map(chat => (
 				<ChatPreview key={chat.chatId} chat={chat} />
 			))}

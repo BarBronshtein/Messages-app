@@ -35,7 +35,6 @@ const AudioRecorder = () => {
 					status === 'idle' ? '' : 'blink'
 				} cursor-pointer hover:bg-[#4444] hover:rounded-full h-fit p-2`}
 			></span>
-			<AudioFile audio={audioResult} />
 		</>
 	);
 };

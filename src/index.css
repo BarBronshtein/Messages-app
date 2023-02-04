@@ -6,7 +6,7 @@
 ::-webkit-scrollbar {
 	width: 8px;
 	background-color: rgba(0, 0, 0, 0);
-	-webkit-border-radius: 100px;
+	--webkit-border-radius: 100px;
 	border-radius: 100px;
 }
 
@@ -16,11 +16,11 @@
 
 ::-webkit-scrollbar-thumb:vertical {
 	background: rgba(0, 0, 0, 0.5);
-	-webkit-border-radius: 100px;
+	--webkit-border-radius: 100px;
 	border-radius: 100px;
 }
 
 ::-webkit-scrollbar-thumb:vertical:active {
-	-webkit-border-radius: 100px;
+	--webkit-border-radius: 100px;
 	border-radius: 100px;
 }

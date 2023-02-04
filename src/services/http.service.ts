@@ -4,8 +4,8 @@ const axios = Axios.create({
 });
 
 export const httpService = {
-	get(endpoint: string, data?: unknown) {
-		return ajax(endpoint, 'GET', data);
+	get(endpoint: string, data?: unknown, signal?: AbortSignal) {
+		return ajax(endpoint, 'GET', data, signal);
 	},
 	post(endpoint: string, data?: unknown) {
 		return ajax(endpoint, 'POST', data);
@@ -21,7 +21,8 @@ export const httpService = {
 async function ajax(
 	endpoint: string,
 	method = 'GET',
-	data: null | unknown = null
+	data: null | unknown = null,
+	signal?: AbortSignal
 ) {
 	try {
 		const res = await axios({
@@ -29,6 +30,7 @@ async function ajax(
 			method,
 			data,
 			params: method === 'GET' ? data : null,
+			signal,
 		});
 		return res.data;
 	} catch (err: any) {

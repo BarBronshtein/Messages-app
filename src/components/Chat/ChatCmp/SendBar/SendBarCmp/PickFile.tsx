@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import FileToUrl from './FileToUrl';
 type Props = {
 	file: null | File;

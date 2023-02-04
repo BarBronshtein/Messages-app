@@ -10,7 +10,6 @@ import { clearContacts, getContacts } from '@/store/actions/chatActions';
 const SearchForm = () => {
 	const dispatch = useAppDispatch();
 	const userOptions = useAppSelector(state => state.chatReducer.contacts);
-
 	const [controller, setController] = useState<AbortController>(null!);
 
 	const clear = (): any => dispatch(clearContacts());
@@ -22,7 +21,6 @@ const SearchForm = () => {
 		setController(newController);
 		dispatch(getContacts(txt, newController.signal));
 	};
-
 	const onChangeInput = utilService.debounce(getUsers, 400);
 
 	const { register, resetForm } = useFormRegister({ txt: '' }, onChangeInput);
@@ -43,7 +41,7 @@ const SearchForm = () => {
 				<input
 					ref={ref}
 					placeholder="Search"
-					className="px-12 py-4 bg-slate-800 rounded-full border-none outline-none w-full "
+					className="px-12 py-4 text-[#050505] bg-[rgba(134,142,153,0.1)] dark:bg-slate-800 dark:text-[rgb(156,163,175)] rounded-full border-none outline-none w-full "
 					type="text"
 					{...register('txt')}
 				/>
@@ -59,10 +57,13 @@ const SearchForm = () => {
 				></span>
 			)}
 
-			{userOptions &&
-				userOptions.map((user: User) => (
-					<Contact key={user._id} user={user} clearContacts={clear} />
-				))}
+			{userOptions && (
+				<div className="flex flex-col absolute w-full">
+					{userOptions.map((user: User) => (
+						<Contact key={user._id} user={user} clearContacts={clear} />
+					))}
+				</div>
+			)}
 		</form>
 	);
 };
