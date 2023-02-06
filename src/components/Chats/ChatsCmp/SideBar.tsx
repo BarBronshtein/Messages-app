@@ -13,7 +13,7 @@ const SideBar = ({ isShown, onClose }: Props) => {
 	const el = useRef<Element>(document.getElementById('modal-root') as Element);
 
 	const [isOpen, setIsOpen] = useState(false);
-
+	const [state, setState] = useState(false);
 	const location = useLocation();
 
 	const handleClickOutside = useCallback((ev: MouseEvent) => {
@@ -82,6 +82,22 @@ const SideBar = ({ isShown, onClose }: Props) => {
 						<p>{el.name}</p>
 					</div>
 				))}
+				<div
+					onClick={() => {
+						sessionStorage.getItem('theme') === 'dark'
+							? sessionStorage.setItem('theme', 'light')
+							: sessionStorage.setItem('theme', 'dark');
+						setState(state => !state);
+					}}
+					className="flex items-center cursor-pointer hover:bg-gray-500 rounded p-3 text-white"
+				>
+					<span
+						className={`fa-solid ${
+							sessionStorage.getItem('theme') === 'dark' ? 'fa-moon' : 'fa-sun'
+						} bg-slate-500 px-2 py-1 rounded mr-11 text-xl`}
+					></span>
+					<p>Theme</p>
+				</div>
 			</section>
 		</aside>,
 		el.current

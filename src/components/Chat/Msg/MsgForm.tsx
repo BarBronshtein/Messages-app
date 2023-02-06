@@ -47,20 +47,25 @@ const MsgForm = () => {
 		>
 			{!value && !file && <AudioRecorder />}
 			{isMobile && !value && (
-				<span className="fa-solid fa-camera h-fit hover:bg-[#4444] hover:rounded-full p-2"></span>
+				<PickFile
+					file={file}
+					className="fa-camera"
+					setFile={setFile}
+					capture="user"
+				/>
 			)}
-			<PickFile file={file} setFile={setFile} />
+			<PickFile file={file} className="fa-image" setFile={setFile} />
 			<div className="input-group relative grow">
 				<textarea
 					cols={20}
 					rows={1}
 					placeholder="Message"
-					className="w-full text-black rounded-3xl border-none outline-none pl-4 pr-[2.25rem] py-1 max-h-[225px] text-lg sm:2xl  bg-gray-300 resize-none overflow-hidden "
+					className="w-full text-black rounded-3xl border-none outline-none pl-4 pr-[2.25rem] py-1 max-h-[225px] text-lg sm:2xl  bg-gray-300 resize-none overflow-hidden dark:bg-[#3A3B3C] dark:text-light"
 					{...register('msg')}
 					onInput={ev => auto_height(ev.target as HTMLTextAreaElement)}
 				></textarea>
 
-				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem]"></span>
+				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem] hover:cursor-not-allowed"></span>
 			</div>
 
 			{value || file ? (
@@ -69,7 +74,18 @@ const MsgForm = () => {
 				''
 			)}
 			{!value && !file && (
-				<span className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>
+				<span
+					className="fa-solid fa-thumbs-up h-fit cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"
+					onClick={() => {
+						const message = chatService.getEmpyMessage('👍');
+						dispatch(
+							addMessage(
+								{ ...message, file: null, timestamp: Date.now() },
+								(curChat as Chat)._id
+							)
+						);
+					}}
+				></span>
 			)}
 		</form>
 	);

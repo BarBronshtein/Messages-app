@@ -38,7 +38,7 @@ function App() {
 	}, []);
 	return (
 		<div className="main-app">
-			<main className="min-h-screen">
+			<main className={`min-h-screen ${sessionStorage.getItem('theme')}`}>
 				<ErrorBoundary>
 					<Suspense fallback={<Loader />}>
 						<Routes>

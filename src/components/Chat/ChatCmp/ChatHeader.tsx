@@ -15,7 +15,7 @@ const ChatHeader = ({ className }: { className?: string }) => {
 	const sendTo = '/chats/';
 	return (
 		<header
-			className={`chat-header shadow-[inset_0_0_4px] shadow-[#00000033] items-center flex justify-around p-2 text-lg sm:text-xl ${className}`}
+			className={`chat-header shadow-[inset_0_0_4px] shadow-[#00000033] items-center flex justify-around p-2 text-lg sm:text-xl ${className} dark:shadow-[#ffffff33]`}
 		>
 			<Link to={sendTo}>
 				<span className="fa-solid text-blue-600 fa-arrow-left cursor-pointer hover:bg-[#4444] hover:rounded-full p-2"></span>

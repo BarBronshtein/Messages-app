@@ -34,14 +34,14 @@ const SearchForm = () => {
 		<form
 			onSubmit={onSubmit}
 			onClick={() => ref.current?.focus()}
-			className="hover:cursor-text max-w-[550px] relative"
+			className="hover:cursor-text max-w-[550px] relative z-0"
 		>
 			<div className="input-group py-4 relative z-[-5] w-full text-gray-400">
-				<span className="fa-solid fa-magnifying-glass absolute text-sm  top-[2.2rem] left-4"></span>
+				<span className="fa-solid fa-magnifying-glass absolute text-sm  top-[2.2rem] left-4 dark:text-[#606770]"></span>
 				<input
 					ref={ref}
 					placeholder="Search"
-					className="px-12 py-4 text-[#050505] bg-[rgba(134,142,153,0.1)] dark:bg-slate-800 dark:text-[rgb(156,163,175)] rounded-full border-none outline-none w-full "
+					className="px-12 py-4 text-[#050505] bg-[rgba(134,142,153,0.1)]  dark:text-[#606770] rounded-full border-none outline-none w-full dark:bg-[#3a3b3c]"
 					type="text"
 					{...register('txt')}
 				/>

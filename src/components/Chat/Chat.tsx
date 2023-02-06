@@ -21,7 +21,7 @@ const Chat = (props: { className?: string }) => {
 		dispatch(setChat(chatId, newController.signal));
 	}, [chatId]);
 	return (
-		<section className="chat flex flex-col min-h-screen h-screen">
+		<section className="chat flex flex-col min-h-screen h-screen dark:bg-[#242526] dark:text-white">
 			<ChatHeader className={props.className} />
 			<MsgList />
 			<SendBar />

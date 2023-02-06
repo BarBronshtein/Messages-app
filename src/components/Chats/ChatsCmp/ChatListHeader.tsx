@@ -13,10 +13,10 @@ const ChatListHeader = () => {
 			<header className="flex items-center py-4 px-2 justify-between max-w-[550px]">
 				<span
 					onClick={() => closeSideBar()}
-					className="fa-solid fa-bars bg-slate-300  rounded-full p-2 cursor-pointer"
+					className="fa-solid fa-bars bg-slate-300 dark:bg-slate-700  rounded-full p-2 cursor-pointer"
 				></span>
 				<h1 className="absolute left-16">Chats</h1>
-				<span className="fa-solid fa-pen bg-slate-300 rounded-full p-2 cursor-pointer"></span>
+				<span className="fa-solid fa-pen bg-slate-300 rounded-full p-2 cursor-pointer hover:cursor-not-allowed dark:bg-slate-700"></span>
 			</header>
 			<SideBar isShown={open} onClose={() => setOpen(() => false)}></SideBar>
 		</>

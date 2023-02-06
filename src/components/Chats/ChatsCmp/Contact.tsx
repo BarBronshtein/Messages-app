@@ -21,7 +21,7 @@ const Contact = (props: Props) => {
 	};
 	return (
 		<div
-			className="w-full py-6 z-5 rounded flex items-center cursor-pointer p-2 hover:bg-slate-200 bg-white"
+			className="w-full py-6 z-5 rounded flex items-center cursor-pointer p-2 hover:bg-slate-200 bg-white dark:bg-[#3a3b3c]"
 			onClick={() => onClick(props.user)}
 		>
 			<Avatar imgSize="lg" imgUrl={props.user.photo || ''} />

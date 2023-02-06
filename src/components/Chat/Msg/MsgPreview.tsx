@@ -27,7 +27,7 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 			<div
 				className={`w-fit ${
 					fromUser !== loggedinUser._id
-						? 'col-start-1 '
+						? 'col-start-1 dark:text-white'
 						: 'col-start-2 text-righ text-white justify-self-end'
 				}`}
 			>
@@ -35,7 +35,9 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 				{txt && (
 					<p
 						className={`p-3 rounded-full ${
-							fromUser !== loggedinUser._id ? 'bg-gray-300' : 'bg-blue-500'
+							fromUser !== loggedinUser._id
+								? 'bg-[#E4E6EB] dark:bg-[#3E4042]'
+								: 'bg-[rgb(0,132,255)]'
 						}`}
 					>
 						{words.map((word, i) =>
@@ -55,7 +57,6 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 					</p>
 				)}
 			</div>
-			{/* {!!type && <div> {markup}</div>} */}
 		</div>
 	);
 };
