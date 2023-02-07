@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import Avatar from '@/components/Avatar';
 import ProfileModal from '@/components/ProfileModal/ProfileModal';
 import { userService } from '@/services/user.service';
+import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
+import { changeTheme } from '@/store/actions/themeAction';
 
 type EventListener = (this: Element, ev: Event) => void;
 type Props = { isShown: boolean; onClose: () => void };
@@ -11,9 +13,10 @@ type Props = { isShown: boolean; onClose: () => void };
 const SideBar = ({ isShown, onClose }: Props) => {
 	const ref = useRef<null | HTMLElement>(null);
 	const el = useRef<Element>(document.getElementById('modal-root') as Element);
-
+	const dispatch = useAppDispatch();
+	const { theme } = useAppSelector(state => state.themeReducer);
+	const setTheme = () => dispatch(changeTheme());
 	const [isOpen, setIsOpen] = useState(false);
-	const [state, setState] = useState(false);
 	const location = useLocation();
 
 	const handleClickOutside = useCallback((ev: MouseEvent) => {
@@ -83,17 +86,12 @@ const SideBar = ({ isShown, onClose }: Props) => {
 					</div>
 				))}
 				<div
-					onClick={() => {
-						sessionStorage.getItem('theme') === 'dark'
-							? sessionStorage.setItem('theme', 'light')
-							: sessionStorage.setItem('theme', 'dark');
-						setState(state => !state);
-					}}
+					onClick={() => setTheme()}
 					className="flex items-center cursor-pointer hover:bg-gray-500 rounded p-3 text-white"
 				>
 					<span
 						className={`fa-solid ${
-							sessionStorage.getItem('theme') === 'dark' ? 'fa-moon' : 'fa-sun'
+							theme === 'dark' ? 'fa-moon' : 'fa-sun'
 						} bg-slate-500 px-2 py-1 rounded mr-11 text-xl`}
 					></span>
 					<p>Theme</p>

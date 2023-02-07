@@ -2,6 +2,7 @@ export const utilService = {
 	debounce,
 	timeAgo,
 	makeId,
+	auto_height,
 };
 
 function makeId(length = 8) {
@@ -60,4 +61,11 @@ function timeAgo(input: Date | string | number) {
 			return time; //? time : 'Just now'
 		}
 	}
+}
+
+function auto_height(el: HTMLTextAreaElement) {
+	el.style.height = '1px';
+	el.style.height = el.scrollHeight + 'px';
+	if (parseInt(el.style.height) > 225) el.style.overflowY = 'scroll';
+	else el.style.overflowY = 'hidden';
 }

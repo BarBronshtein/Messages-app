@@ -7,9 +7,10 @@ import UserMsg from './components/UserMsg/UserMsg';
 import { UserRoutes } from './routes/UserRoutes';
 import { GuestRoute } from './routes/GuestRoute';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import { useAppSelector } from './store/TypeHooks';
 
 const Chat = lazy(() => import('./components/Chat/Chat'));
-const ChatList = lazy(() => import('./components/Chats/Chats'));
+const Chats = lazy(() => import('./components/Chats/Chats'));
 const LoginForm = lazy(() => import('./pages/Login/Login'));
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit/ProfileEdit'));
@@ -17,6 +18,7 @@ const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 const ChatArea = lazy(() => import('./pages/ChatArea/ChatArea'));
 
 function App() {
+	const { theme } = useAppSelector(state => state.themeReducer);
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
 
@@ -38,7 +40,7 @@ function App() {
 	}, []);
 	return (
 		<div className="main-app">
-			<main className={`min-h-screen ${sessionStorage.getItem('theme')}`}>
+			<main className={`min-h-screen ${theme}`}>
 				<ErrorBoundary>
 					<Suspense fallback={<Loader />}>
 						<Routes>
@@ -56,7 +58,7 @@ function App() {
 								)}
 								{isMobile && (
 									<>
-										<Route path="/chats" element={<ChatList />} />
+										<Route path="/chats" element={<Chats />} />
 										<Route path="/chats/:id" element={<Chat />} />
 									</>
 								)}

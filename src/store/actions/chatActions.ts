@@ -102,6 +102,6 @@ export const getContactById = (userId: string): any => {
 	};
 };
 
-export const clearContact = (user: User) => {
+export const clearContact = () => {
 	return { type: ChatActionTypes.SET_CUR_CONTACT, payload: null };
 };

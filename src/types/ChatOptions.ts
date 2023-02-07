@@ -4,4 +4,5 @@ export type ChatOption = {
 	user: User[];
 	lastMsg?: { txt: string; timestamp: number };
 	chatId: string;
+	_id: string;
 };

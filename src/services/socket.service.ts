@@ -5,7 +5,8 @@ interface ISocket extends Socket {
 	userId?: string;
 }
 
-enum ISocketTypes {
+export enum ISocketTypes {
+	EMIT_CONVERSATION_UPDATE = 'EMIT_CONVERSATION_UPDATE',
 	SET_USER_EMIT_SOCKET = 'SET_USER_SOCKET',
 	DISCONNET_USER_EMIT_SOCKET = 'DISCONNET_USER_SOCKET',
 	SET_TOPIC = 'SET_TOPIC',
@@ -21,7 +22,7 @@ export const socketService = createSocketService();
 // for debugging from console
 (<any>window).socketService = socketService;
 
-socketService.setup();
+// socketService.setup();
 
 function createSocketService() {
 	var socket: ISocket | null = null;

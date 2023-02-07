@@ -4,7 +4,7 @@ import MsgList from './Msg/MsgList';
 import SendBar from './ChatCmp/SendBar/SendBar';
 import { useAppDispatch } from '@/store/TypeHooks';
 import { useLocation } from 'react-router-dom';
-import { setChat } from '@/store/actions/chatActions';
+import { setChat, clearChat } from '@/store/actions/chatActions';
 
 const Chat = (props: { className?: string }) => {
 	const [controller, setController] = useState<AbortController>(null!);
@@ -19,6 +19,9 @@ const Chat = (props: { className?: string }) => {
 		const newController = new AbortController();
 		setController(newController);
 		dispatch(setChat(chatId, newController.signal));
+		return () => {
+			dispatch(clearChat());
+		};
 	}, [chatId]);
 	return (
 		<section className="chat flex flex-col min-h-screen h-screen dark:bg-[#242526] dark:text-white">

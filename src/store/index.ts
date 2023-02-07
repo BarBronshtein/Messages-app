@@ -1,3 +1,4 @@
+import { themeReducer } from './reducers/themeReducer';
 import { chatReducer } from './reducers/chatReducer';
 import {
 	applyMiddleware,
@@ -13,6 +14,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
 	chatReducer,
 	userMsgReducer,
+	themeReducer,
 });
 
 export const store = createStore(

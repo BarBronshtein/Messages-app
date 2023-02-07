@@ -5,37 +5,41 @@ import PickFile from '../ChatCmp/SendBar/SendBarCmp/PickFile';
 import { chatService } from '@/services/chat.service';
 import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
 import { addMessage } from '@/store/actions/chatActions';
+import { Chat, Message } from '@/types';
+import { ISocketTypes, socketService } from '@/services/socket.service';
 import { utilService } from '@/services/util.service';
-import { Chat } from '@/types';
 
 const MsgForm = () => {
 	const dispatch = useAppDispatch();
-	const { curChat } = useAppSelector(state => state.chatReducer);
+	const { curChat, chats } = useAppSelector(state => state.chatReducer);
 	const [file, setFile] = useState<File | null>(null);
+
+	const getType = (file: File | null) => {
+		if (!file) return undefined;
+		return file.type.startsWith('image/') ? 'img' : 'video';
+	};
+
+	const emitConversationUpdate = (message: Message) =>
+		socketService.emit(ISocketTypes.EMIT_CONVERSATION_UPDATE, {
+			lastMsg: message.txt || getType(file),
+			timestamp: Date.now(),
+			chatId: curChat?._id,
+			_id: chats?.find(chat => chat.chatId === curChat?._id)?._id,
+		});
 
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
 
+	// replace useRef instead of useFormRegister
 	const { register, resetForm } = useFormRegister({ msg: '' }, () => {});
 	const { value } = register('msg');
-	const auto_height = (el: HTMLTextAreaElement) => {
-		el.style.height = '1px';
-		el.style.height = el.scrollHeight + 'px';
-		if (parseInt(el.style.height) > 225) el.style.overflowY = 'scroll';
-		else el.style.overflowY = 'hidden';
-	};
-
 	return (
 		<form
 			className="w-full flex relative"
 			onSubmit={ev => {
 				ev.preventDefault();
 				const message = chatService.getEmpyMessage(value);
-				const type = file
-					? file.type.startsWith('image/')
-						? 'img'
-						: 'video'
-					: undefined;
+				const type = getType(file);
 				dispatch(
 					addMessage(
 						{ ...message, file, timestamp: Date.now(), type },
@@ -51,7 +55,7 @@ const MsgForm = () => {
 					file={file}
 					className="fa-camera"
 					setFile={setFile}
-					capture="user"
+					capture="environment"
 				/>
 			)}
 			<PickFile file={file} className="fa-image" setFile={setFile} />
@@ -62,7 +66,7 @@ const MsgForm = () => {
 					placeholder="Message"
 					className="w-full text-black rounded-3xl border-none outline-none pl-4 pr-[2.25rem] py-1 max-h-[225px] text-lg sm:2xl  bg-gray-300 resize-none overflow-hidden dark:bg-[#3A3B3C] dark:text-light"
 					{...register('msg')}
-					onInput={ev => auto_height(ev.target as HTMLTextAreaElement)}
+					onInput={ev => utilService.auto_height(ev.target as HTMLTextAreaElement)}
 				></textarea>
 
 				<span className="fa-solid h-fit fa-face-smile absolute right-4 top-[0.65rem] sm:top-[0.65rem] hover:cursor-not-allowed"></span>

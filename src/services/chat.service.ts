@@ -53,7 +53,6 @@ async function addMessage(
 			const { data } = await axios.post(`${BASE_URL}/api/file/upload`, formData, {
 				headers: { 'Content-Type': 'multipart/form-data' },
 			});
-			console.log('data', data);
 			message.url = data;
 			delete message.file;
 		}
