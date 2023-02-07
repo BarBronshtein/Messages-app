@@ -19,15 +19,15 @@ const ChatPreview = (props: Props) => {
 						: ''
 				}`}
 			>
-				<Avatar imgSize="lg" imgUrl={props.chat.user[0].photo || ''} />
+				<Avatar imgSize="lg" imgUrl={props.chat.user?.[0].photo || ''} />
 				<div className="flex flex-col pl-3">
-					<h4>{props.chat.user[0].fullname}</h4>
+					<h4>{props.chat.user?.[0].fullname}</h4>
 					{props.chat.lastMsg && (
 						<span className="text-[#65676B] dark:text-[#B0B3B8]">
 							{utilService.timeAgo(props.chat.lastMsg.timestamp) + ' '}
 							<span>
 								{props.chat.lastMsg.txt ? '· ' : ''}
-								{props.chat.lastMsg.txt.length > 28
+								{props.chat.lastMsg.txt?.length > 28
 									? `${props.chat.lastMsg.txt.slice(0, 29)}...`
 									: props.chat.lastMsg.txt}
 							</span>

@@ -4,7 +4,13 @@ import MsgList from './Msg/MsgList';
 import SendBar from './ChatCmp/SendBar/SendBar';
 import { useAppDispatch } from '@/store/TypeHooks';
 import { useLocation } from 'react-router-dom';
-import { setChat, clearChat } from '@/store/actions/chatActions';
+import {
+	setChat,
+	clearChat,
+	addSocketMessage,
+} from '@/store/actions/chatActions';
+import { ISocketTypes, socketService } from '@/services/socket.service';
+import { Message } from '@/types';
 
 const Chat = (props: { className?: string }) => {
 	const [controller, setController] = useState<AbortController>(null!);
@@ -15,12 +21,20 @@ const Chat = (props: { className?: string }) => {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		if (!chatId) return;
+
+		socketService.emit(ISocketTypes.SET_TOPIC, chatId);
+		socketService.on(ISocketTypes.SERVER_EMIT_ADD_MESSAGE, (msg: Message) =>
+			dispatch(addSocketMessage(msg))
+		);
+
 		if (controller) controller.abort();
 		const newController = new AbortController();
 		setController(newController);
 		dispatch(setChat(chatId, newController.signal));
+
 		return () => {
 			dispatch(clearChat());
+			socketService.off(ISocketTypes.SERVER_EMIT_ADD_MESSAGE);
 		};
 	}, [chatId]);
 	return (

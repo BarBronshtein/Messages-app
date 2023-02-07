@@ -3,14 +3,25 @@ import ChatListHeader from './ChatsCmp/ChatListHeader';
 import ChatList from './ChatsCmp/ChatList';
 import SearchForm from './ChatsCmp/SearchForm';
 import { useAppDispatch, useAppSelector } from '@/store/TypeHooks';
-import { clearContacts, getChatOptions } from '@/store/actions/chatActions';
+import {
+	clearContacts,
+	getChatOptions,
+	saveSocketConversation,
+} from '@/store/actions/chatActions';
+import { ISocketTypes, socketService } from '@/services/socket.service';
+import { ChatOption } from '@/types';
 const Chats = () => {
 	const dispatch = useAppDispatch();
 	const { chats } = useAppSelector(state => state.chatReducer);
 	useEffect(() => {
+		socketService.on(
+			ISocketTypes.SERVER_EMIT_CONVERSATION_UPDATE,
+			(data: ChatOption) => dispatch(saveSocketConversation(data))
+		);
 		dispatch(getChatOptions());
 		return () => {
 			clearContacts();
+			socketService.off(ISocketTypes.SERVER_EMIT_CONVERSATION_UPDATE);
 		};
 	}, []);
 	return (

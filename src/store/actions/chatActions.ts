@@ -3,7 +3,7 @@ import { SET_MSG, UserMsg } from './../reducers/userMsgReducer';
 import { ChatAction } from './../reducers/chatReducer';
 import { userService } from './../../services/user.service';
 import { setUserMsg } from './userMsgActions';
-import { ChatActionTypes, Message, User } from '@/types';
+import { ChatActionTypes, ChatOption, Message, User } from '@/types';
 import { Dispatch, Action } from 'redux';
 import { chatService } from '@/services/chat.service';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
@@ -104,4 +104,12 @@ export const getContactById = (userId: string): any => {
 
 export const clearContact = () => {
 	return { type: ChatActionTypes.SET_CUR_CONTACT, payload: null };
+};
+
+export const addSocketMessage = (payload: Message) => {
+	return { type: ChatActionTypes.ADD_MESSAGE, payload };
+};
+
+export const saveSocketConversation = (payload: ChatOption) => {
+	return { type: ChatActionTypes.SET_CHATS, payload };
 };

@@ -50,6 +50,7 @@ function App() {
 							<Route element={<UserRoutes />}>
 								<Route path="/personal-info" element={<Profile />} />
 								<Route path="/personal-info/edit" element={<ProfileEdit />} />
+								{/* Create mobile routes and change it instead of using short circuting */}
 								{!isMobile && (
 									<>
 										<Route path="/chats" element={<ChatArea />} />

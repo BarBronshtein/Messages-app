@@ -18,7 +18,12 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 		case ChatActionTypes.SET_CHATS:
 			return <ChatState>{
 				...state,
-				chats: action.payload,
+				chats: Array.isArray(action.payload)
+					? action.payload
+					: [
+							...state.chats!.filter(chatOpt => chatOpt._id !== action.payload._id),
+							action.payload,
+					  ].sort((a, b) => b - a),
 			};
 		case ChatActionTypes.SET_CUR_CONTACT:
 			return <ChatState>{
@@ -40,7 +45,7 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 				...state,
 				curChat: {
 					...state.curChat,
-					messages: [...(state.curChat as Chat).messages, action.payload],
+					messages: [...state.curChat!.messages, action.payload],
 				},
 			};
 		default:

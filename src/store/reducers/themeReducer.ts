@@ -1,6 +1,8 @@
 export const CHANGE_THEME = 'CHANGE_THEME' as const;
 
-const INITIAL_STATE: { theme: 'dark' | 'light' } = { theme: 'light' };
+const INITIAL_STATE: { theme: 'dark' | 'light' } = {
+	theme: sessionStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+};
 
 type Action = {
 	type: typeof CHANGE_THEME;

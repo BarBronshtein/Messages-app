@@ -1,6 +1,5 @@
 import { httpService } from './http.service';
 import { User } from '@/types';
-import axios from 'axios';
 
 export const userService = {
 	getUsers,
@@ -11,16 +10,21 @@ export const userService = {
 const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL;
 
 async function getUsers(filterByName = '', signal: AbortSignal) {
-	const res = await axios.get(BASE_URL + '/api/user', { signal });
-	const users = res.data;
-	if (filterByName) {
-		const regex = new RegExp(filterByName, 'i');
-		return users.filter(
-			(user: User) =>
-				user.fullname.match(regex) && user._id !== getLoggedInUser()._id
-		);
+	try {
+		const users = await httpService.get(BASE_URL + '/api/user', {}, signal);
+		if (filterByName) {
+			const regex = new RegExp(filterByName, 'i');
+			return users.filter(
+				(user: User) =>
+					user.fullname.match(regex) && user._id !== getLoggedInUser()._id
+			);
+		}
+		return users.filter((user: User) => user._id !== getLoggedInUser()._id);
+	} catch (err: any) {
+		console.log(err);
+		if (err.code === 'ERR_CANCELED') return;
+		throw new Error('Failed to get users');
 	}
-	return users.filter((user: User) => user._id !== getLoggedInUser()._id);
 }
 
 async function getUserById(userId: string) {

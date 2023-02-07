@@ -7,10 +7,10 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 	const urlRegex = new RegExp(
 		'^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|(www\\.)?){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'
 	);
-	const words = txt.split(' ');
+	const words = txt?.split(' ');
 	const types = {
 		video: <video className="rounded-lg" controls src={url}></video>,
-		img: <img className="rounded-lg" src={url} />,
+		img: <img loading="lazy" className="rounded-lg" src={url} />,
 		audio: <audio controls src={url}></audio>,
 	};
 
