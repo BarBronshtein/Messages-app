@@ -1,6 +1,6 @@
 import React from 'react';
 import Chat from '@/components/Chat/Chat';
-import ChatList from '@/components/Chats/Chats';
+import Chats from '@/components/Chats/Chats';
 import { useParams } from 'react-router-dom';
 import DefaultChat from '@/components/Chat/ChatCmp/DefaultChat';
 
@@ -9,7 +9,7 @@ const ChatArea = () => {
 
 	return (
 		<section className="grid grid-cols-[minmax(20vw,380px)_1fr]">
-			<ChatList />
+			<Chats />
 			{id ? <Chat className="py-8" /> : <DefaultChat />}
 		</section>
 	);

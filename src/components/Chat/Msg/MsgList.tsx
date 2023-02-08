@@ -11,7 +11,7 @@ const MsgList = () => {
 	const { curChat } = useAppSelector(state => state.chatReducer);
 	useEffect(() => {
 		scrollToBottom();
-	}, [curChat?._id]);
+	}, [curChat?._id, curChat?.messages.length]);
 	const messages = curChat?.messages;
 	return (
 		<div ref={ref} className="msg-list grow px-4 py-2 overflow-y-auto">

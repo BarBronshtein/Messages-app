@@ -16,24 +16,27 @@ const MsgForm = () => {
 	const { curChat, chats } = useAppSelector(state => state.chatReducer);
 	const [file, setFile] = useState<File | null>(null);
 
-	const add = (msg: Message) =>
-		dispatch(
-			addMessage({ ...msg, file: null, timestamp: Date.now() }, curChat!._id)
-		);
-
 	const getType = (file: File | null): 'img' | 'video' | undefined => {
 		if (!file) return;
 		return file.type.startsWith('image/') ? 'img' : 'video';
 	};
 
-	const emitConversation = (message: Message) =>
+	const add = (msg: Message) => {
+		dispatch(
+			addMessage({ ...msg, file: null, timestamp: Date.now() }, curChat!._id)
+		);
+		emitConversation(msg);
+	};
+
+	const emitConversation = (message: Message) => {
+		const curConversation = chats!.find(chat => chat.chatId === curChat!._id)!;
 		socketService.emit(ISocketTypes.CLIENT_EMIT_CONVERSATION_UPDATE, {
-			lastMsg: message.txt || getType(file),
-			timestamp: Date.now(),
+			lastMsg: { txt: message.txt || getType(file), timestamp: Date.now() },
 			chatId: curChat!._id,
-			user: [userService.getLoggedInUser()],
-			_id: chats!.find(chat => chat.chatId === curChat!._id)!._id,
+			user: [userService.getLoggedInUser(), ...curConversation.user],
+			_id: curConversation._id,
 		});
+	};
 
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;

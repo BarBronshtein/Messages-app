@@ -17,21 +17,21 @@ export enum ISocketTypes {
 
 const baseUrl = import.meta.env.PROD
 	? import.meta.env.VITE_REMOTE_APP_URL
-	: import.meta.env.VITE_REMOTE_APP_URL
-	? import.meta.env.VITE_REMOTE_APP_URL
-	: '//localhost:7050';
+	: 'https://chattyapp.onrender.com';
 export const socketService = createSocketService();
 
 // for debugging from console
 (<any>window).socketService = socketService;
 
-// socketService.setup();
+socketService.setup();
 
 function createSocketService() {
 	var socket: ISocket | null = null;
 	const socketService = {
 		setup() {
-			socket = io(baseUrl);
+			socket = io(baseUrl, {
+				query: { userId: userService.getLoggedInUser()?._id },
+			});
 			const user = userService.getLoggedInUser();
 			if (user) this.login(user._id);
 		},
@@ -45,6 +45,7 @@ function createSocketService() {
 		},
 		emit(eventName: string, data: any) {
 			data = JSON.parse(JSON.stringify(data));
+			console.log(`[eventName: ${eventName}] and [data: ${data}]`);
 			socket?.emit(eventName, data);
 		},
 		login(userId: string) {

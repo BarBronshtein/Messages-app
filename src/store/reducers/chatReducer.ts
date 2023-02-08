@@ -23,7 +23,7 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 					: [
 							...state.chats!.filter(chatOpt => chatOpt._id !== action.payload._id),
 							action.payload,
-					  ].sort((a, b) => b - a),
+					  ].sort((a, b) => b.lastMsg.timestamp - a.lastMsg.timestamp),
 			};
 		case ChatActionTypes.SET_CUR_CONTACT:
 			return <ChatState>{

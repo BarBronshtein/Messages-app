@@ -18,6 +18,7 @@ const Chats = () => {
 			ISocketTypes.SERVER_EMIT_CONVERSATION_UPDATE,
 			(data: ChatOption) => dispatch(saveSocketConversation(data))
 		);
+
 		dispatch(getChatOptions());
 		return () => {
 			clearContacts();
