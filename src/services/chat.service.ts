@@ -1,3 +1,4 @@
+import { ChatOption } from './../types/ChatOptions';
 import { socketService, ISocketTypes } from '@/services/socket.service';
 import { utilService } from '@/services/util.service';
 import { userService } from './user.service';
@@ -42,7 +43,8 @@ async function getChatById(chatId: string, signal: AbortSignal) {
 
 async function addMessage(
 	message: { file?: File | Blob | null; timestamp: number } & Message,
-	chatId: string
+	chatId: string,
+	conversation: ChatOption
 ) {
 	try {
 		if (message.file) {
@@ -58,7 +60,18 @@ async function addMessage(
 			message.url = data;
 			delete message.file;
 		}
-		socketService.emit(ISocketTypes.CLIENT_EMIT_ADD_MESSAGE, message);
+
+		socketService.emit(ISocketTypes.CLIENT_EMIT_ADD_MESSAGE, {
+			...message,
+			chatId,
+		});
+
+		socketService.emit(ISocketTypes.CLIENT_EMIT_CONVERSATION_UPDATE, {
+			lastMsg: { txt: message.txt, timestamp: message.timestamp },
+			chatId,
+			user: [userService.getLoggedInUser(), ...conversation.user],
+			_id: conversation._id,
+		});
 
 		const res = await httpService.put(
 			`${BASE_URL}/api/chat/message/${chatId}`,

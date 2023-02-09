@@ -16,6 +16,8 @@ const MsgForm = () => {
 	const { curChat, chats } = useAppSelector(state => state.chatReducer);
 	const [file, setFile] = useState<File | null>(null);
 
+	const curConversation = chats?.find(chat => chat.chatId === curChat?._id)!;
+
 	const getType = (file: File | null): 'img' | 'video' | undefined => {
 		if (!file) return;
 		return file.type.startsWith('image/') ? 'img' : 'video';
@@ -23,19 +25,12 @@ const MsgForm = () => {
 
 	const add = (msg: Message) => {
 		dispatch(
-			addMessage({ ...msg, file: null, timestamp: Date.now() }, curChat!._id)
+			addMessage(
+				{ ...msg, file: null, timestamp: Date.now() },
+				curChat!._id,
+				curConversation
+			)
 		);
-		emitConversation(msg);
-	};
-
-	const emitConversation = (message: Message) => {
-		const curConversation = chats!.find(chat => chat.chatId === curChat!._id)!;
-		socketService.emit(ISocketTypes.CLIENT_EMIT_CONVERSATION_UPDATE, {
-			lastMsg: { txt: message.txt || getType(file), timestamp: Date.now() },
-			chatId: curChat!._id,
-			user: [userService.getLoggedInUser(), ...curConversation.user],
-			_id: curConversation._id,
-		});
 	};
 
 	const isMobile =
@@ -52,8 +47,7 @@ const MsgForm = () => {
 				const emptyMessage = chatService.getEmpyMessage(value);
 				const type = getType(file);
 				const message = { ...emptyMessage, file, timestamp: Date.now(), type };
-				dispatch(addMessage(message, curChat!._id));
-				emitConversation(message);
+				dispatch(addMessage(message, curChat!._id, curConversation));
 				resetForm();
 			}}
 		>

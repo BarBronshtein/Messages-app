@@ -67,12 +67,17 @@ export const setChat = (chatId: string, signal: AbortSignal): any => {
 
 export const addMessage = (
 	message: { file: File | Blob | null; timestamp: number } & Message,
-	chatId: string
+	chatId: string,
+	conversation: ChatOption
 ): any => {
 	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
 		try {
 			message.timestamp = Date.now();
-			const addedMessage = await chatService.addMessage(message, chatId);
+			const addedMessage = await chatService.addMessage(
+				message,
+				chatId,
+				conversation
+			);
 			dispatch({ type: ChatActionTypes.ADD_MESSAGE, payload: addedMessage });
 		} catch (err) {
 			console.error(err);

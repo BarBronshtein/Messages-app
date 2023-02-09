@@ -3,7 +3,7 @@ type Props = {
 	audio: Blob | File;
 };
 const AudioFile = ({ audio }: Props) => {
-	const [src, useSrc] = useState<string>('');
+	const [src, useSrc] = useState('');
 	useEffect(() => {
 		if (!audio) return;
 		useSrc(() => URL.createObjectURL(audio));

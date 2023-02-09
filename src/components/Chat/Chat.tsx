@@ -23,9 +23,6 @@ const Chat = (props: { className?: string }) => {
 		if (!chatId) return;
 
 		socketService.emit(ISocketTypes.SET_TOPIC, chatId);
-		socketService.on(ISocketTypes.SERVER_EMIT_ADD_MESSAGE, (msg: Message) =>
-			dispatch(addSocketMessage(msg))
-		);
 
 		if (controller) controller.abort();
 		const newController = new AbortController();
@@ -34,9 +31,15 @@ const Chat = (props: { className?: string }) => {
 
 		return () => {
 			dispatch(clearChat());
-			socketService.off(ISocketTypes.SERVER_EMIT_ADD_MESSAGE);
 		};
 	}, [chatId]);
+
+	useEffect(() => {
+		socketService.on(ISocketTypes.SERVER_EMIT_ADD_MESSAGE, (msg: Message) =>
+			dispatch(addSocketMessage(msg))
+		);
+		return () => socketService.off(ISocketTypes.SERVER_EMIT_ADD_MESSAGE);
+	}, []);
 	return (
 		<section className="chat flex flex-col min-h-screen h-screen dark:bg-[#242526] dark:text-white">
 			<ChatHeader className={props.className} />

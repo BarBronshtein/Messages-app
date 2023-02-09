@@ -61,6 +61,7 @@ function timeAgo(input: Date | string | number) {
 			return time; //? time : 'Just now'
 		}
 	}
+	return 'Just now';
 }
 
 function auto_height(el: HTMLTextAreaElement) {
