@@ -10,9 +10,7 @@ export default defineConfig({
 			name: 'msg-app',
 			filename: 'remoteEntry.js',
 			remotes: {
-				auth:
-					import.meta.env?.VITE_REMOTE_ASSETS_APP_URL ||
-					'https://d13brhpf8ykarf.cloudfront.net/assets/remoteEntry.js',
+				auth: 'https://d13brhpf8ykarf.cloudfront.net/assets/remoteEntry.js',
 			},
 		}),
 	],
