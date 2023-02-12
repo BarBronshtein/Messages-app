@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@originjs/vite-plugin-federation": "^1.1.11",
+		"@originjs/vite-plugin-federation": "^1.2.0",
 		"axios": "^1.2.1",
 		"framer-motion": "^7.6.19",
 		"react": "^18.2.0",
