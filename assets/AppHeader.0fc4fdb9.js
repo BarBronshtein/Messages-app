@@ -1,0 +1,1 @@
+import{_ as r}from"./_virtual___federation__.798434c0.js";import{r as t,b as a}from"./index.3c7c3a6e.js";const o=await r("auth","./App-Header");let{AppHeader:p}=o;const f=()=>{const e=t.exports.useRef(null);return t.exports.useEffect(()=>{p(e.current)},[]),a("div",{ref:e})};export{f as default};

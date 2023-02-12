@@ -1,0 +1,1 @@
+.blink{animation:blink-animation 1.5s infinite;-webkit-animation:blink-animation 1.5s infinite}@keyframes blink-animation{0%{background-color:transparent}50%{opacity:.6;background-color:#ec9488}to{background-color:transparent}}
