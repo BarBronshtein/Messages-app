@@ -1,10 +1,6 @@
 import io, { Socket } from 'socket.io-client';
 import { userService } from './user.service';
 
-interface ISocket extends Socket {
-	userId?: string;
-}
-
 export enum ISocketTypes {
 	SET_USER_EMIT_SOCKET = 'SET_USER_SOCKET',
 	DISCONNET_USER_EMIT_SOCKET = 'DISCONNET_USER_SOCKET',
@@ -15,29 +11,23 @@ export enum ISocketTypes {
 	SERVER_EMIT_CONVERSATION_UPDATE = 'SERVER_EMIT_CONVERSATION_UPDATE',
 }
 
-const baseUrl = import.meta.env.PROD
+const baseUrl: string = import.meta.env.PROD
 	? import.meta.env.VITE_REMOTE_APP_URL
-	: 'http://localhost:7050';
+	: 'https://chattyapp.lol';
 export const socketService = createSocketService();
 
 // for debugging from console
-(<any>window).socketService = socketService;
+// (<any>window).socketService = socketService;
 
-// socketService.setup();
+socketService.setup();
 
 function createSocketService() {
-	var socket: ISocket | null = null;
+	var socket: Socket | null = null;
 	const socketService = {
 		setup() {
-			socket = io(baseUrl, {
-				query: {
-					userId: userService.getLoggedInUser()._id,
-					topic:
-						window.location.href.split('/').at(-1) === 'chats'
-							? ''
-							: window.location.href.split('/').at(-1),
-				},
-			});
+			const user = userService.getLoggedInUser();
+			socket = io(baseUrl);
+			setTimeout(this.login, 800, user._id);
 		},
 		on(eventName: string, cb: (...args: any) => void) {
 			socket?.on(eventName, cb);
@@ -52,7 +42,6 @@ function createSocketService() {
 			socket?.emit(eventName, data);
 		},
 		login(userId: string) {
-			console.log(userId);
 			socket?.emit(ISocketTypes.SET_USER_EMIT_SOCKET, userId);
 		},
 		logout() {

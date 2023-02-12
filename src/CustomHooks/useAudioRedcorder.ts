@@ -1,3 +1,4 @@
+import { utilService } from './../services/util.service';
 import { useState, useRef } from 'react';
 export enum RECORD_STATUS {
 	RECORDING = 'recording',
@@ -5,11 +6,13 @@ export enum RECORD_STATUS {
 }
 let mediaRecorder: MediaRecorder;
 let localStream: MediaStream;
-
+interface IBlob extends Blob {
+	id?: string;
+}
 export const useAudioRecorder = () => {
 	const dataArray = useRef<Blob[]>([]);
 	const [status, setStatus] = useState<RECORD_STATUS>(RECORD_STATUS.IDLE);
-	const [audioResult, setAudioResult] = useState<Blob>(null!);
+	const [audioResult, setAudioResult] = useState<IBlob>(null!);
 	const [errorMessage, setErrorMessage] = useState<object | string>('');
 
 	const startRecording = () => {
@@ -33,8 +36,11 @@ export const useAudioRecorder = () => {
 		if (status === RECORD_STATUS.IDLE) return;
 		mediaRecorder.stop();
 		mediaRecorder.onstop = () => {
-			const audioData = new Blob(dataArray.current, { type: 'audio/webm;' });
+			const audioData: IBlob = new Blob(dataArray.current, {
+				type: 'audio/webm;',
+			});
 			dataArray.current = [];
+			audioData.id = utilService.makeId();
 			setAudioResult(audioData);
 			setStatus(RECORD_STATUS.IDLE);
 			localStream

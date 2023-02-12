@@ -14,6 +14,7 @@ const AudioRecorder = () => {
 
 	const { startRecording, stopRecording, audioResult, status } =
 		useAudioRecorder();
+
 	useEffect(() => {
 		if (!audioResult) return;
 		// Do something
@@ -25,7 +26,7 @@ const AudioRecorder = () => {
 				curConversation
 			)
 		);
-	}, [audioResult]);
+	}, [audioResult?.id]);
 	return (
 		<>
 			<span

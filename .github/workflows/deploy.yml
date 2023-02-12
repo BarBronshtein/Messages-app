@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+ push:
+  branches: ['main']
+
+jobs:
+ build:
+  name: Build
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout repo
+     uses: actions/checkout@v2
+
+   - name: Setup Node
+     uses: actions/setup-node@v1
+     with:
+      node-version: 16
+
+   - name: Cache node modules
+     uses: actions/cache@v2
+     with:
+      path: ~/node_modules
+      key: cache-${{ hashFiles('**/package-lock.json') }}
+
+   - name: Install and build
+     run: |
+      npm install
+      npm run build -- --base=/${{ github.event.repository.name }}/
+
+   - name: Deploy to github pages
+     uses: JamesIves/github-pages-deploy-action@4.1.0
+     with:
+      branch: gh-pages
+      folder: dist
+
+   - name: Publish deployed code
+     uses: actions/upload-artifact@v2
+     with:
+      name: published
+      path: ./dist

@@ -21,3 +21,5 @@ onmessage = (ev: MessageEvent<File>) => {
 	};
 	reader.readAsDataURL(file);
 };
+
+export {};

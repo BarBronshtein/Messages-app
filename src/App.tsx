@@ -24,8 +24,9 @@ function App() {
 
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
-		// await axios.post(`${import.meta.env.VITE_AUTH_API_PROD_REMOTE}/auth/logout`);
-		await axios.post(`https://chattyapp.lol/api/auth/logout`);
+		import.meta.env.PROD
+			? await axios.post(`${import.meta.env.VITE_REMOTE_APP_URL}/auth/logout`)
+			: await axios.post(`http://localhost:7050/api/auth/logout`);
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
 	};

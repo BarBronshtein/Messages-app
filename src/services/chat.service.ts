@@ -14,7 +14,7 @@ export const chatService = {
 	addMessage,
 };
 
-const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL || 'https://chattyapp.lol';
+const BASE_URL = import.meta.env.VITE_REMOTE_APP_URL || 'http://localhost:7050';
 
 async function getChats() {
 	try {
@@ -49,11 +49,9 @@ async function addMessage(
 	try {
 		if (message.file) {
 			const formData = new FormData();
-			formData.append(
-				'file',
-				message.file,
-				`${message.file.name}/${message.file.type}`
-			);
+			const { name, type } = message.file as File;
+
+			formData.append('file', message.file, `${name}/${type}`);
 			const { data } = await axios.post(`${BASE_URL}/api/file/upload`, formData, {
 				headers: { 'Content-Type': 'multipart/form-data' },
 			});
