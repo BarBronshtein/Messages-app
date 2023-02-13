@@ -36,20 +36,25 @@ const MsgForm = () => {
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
 
+	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+		ev.preventDefault();
+		const emptyMessage = chatService.getEmpyMessage(value);
+		const type = getType(file);
+		const message = { ...emptyMessage, file, timestamp: Date.now(), type };
+		dispatch(addMessage(message, curChat!._id, curConversation));
+		resetForm();
+	};
+
 	// replace useRef instead of useFormRegister
 	const { register, resetForm } = useFormRegister({ msg: '' }, () => {});
 	const { value } = register('msg');
 	return (
 		<form
 			className="w-full flex relative"
-			onSubmit={ev => {
-				ev.preventDefault();
-				const emptyMessage = chatService.getEmpyMessage(value);
-				const type = getType(file);
-				const message = { ...emptyMessage, file, timestamp: Date.now(), type };
-				dispatch(addMessage(message, curChat!._id, curConversation));
-				resetForm();
+			onKeyDown={ev => {
+				if (ev.key === 'Enter' && !ev.shiftKey) onSubmit(ev);
 			}}
+			onSubmit={onSubmit}
 		>
 			{/* Audio */}
 			{!value && !file && <AudioRecorder />}
