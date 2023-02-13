@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 /* MAC like scrollbar */
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
 	width: 8px;
 	background-color: rgba(0, 0, 0, 0);
 	--webkit-border-radius: 100px;
 	border-radius: 100px;
 }
 
-::-webkit-scrollbar:hover {
+body::-webkit-scrollbar:hover {
 	background-color: rgba(0, 0, 0, 0.09);
 }
 

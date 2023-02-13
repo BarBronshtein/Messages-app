@@ -89,7 +89,8 @@ export const addMessage = (
 export const addChat = (user: User): any => {
 	return async (dispatch: Dispatch<ChatAction | userMsgAction>) => {
 		try {
-			const chatId = await chatService.createChat(user);
+			const { chatId, conversation } = await chatService.createChat(user);
+			dispatch({ type: ChatActionTypes.SET_CHATS, payload: conversation });
 			return chatId;
 		} catch (err) {
 			console.error(err);

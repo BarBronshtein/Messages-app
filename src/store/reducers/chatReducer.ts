@@ -7,7 +7,7 @@ const INITIAL_STATE: ChatState = {
 	curContact: null,
 	curChat: null,
 	contacts: null,
-	chats: null,
+	chats: [],
 };
 
 export interface ChatAction extends Action<ChatActionTypes> {
@@ -21,7 +21,9 @@ export const chatReducer = (state = INITIAL_STATE, action: ChatAction) => {
 				chats: Array.isArray(action.payload)
 					? action.payload
 					: [
-							...state.chats!.filter(chatOpt => chatOpt._id !== action.payload._id),
+							...state.chats!.filter(
+								conversation => conversation._id !== action.payload._id
+							),
 							action.payload,
 					  ].sort((a, b) => b.lastMsg.timestamp - a.lastMsg.timestamp),
 			};

@@ -25,7 +25,7 @@ function App() {
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
 		import.meta.env.PROD
-			? await axios.post(`${import.meta.env.VITE_REMOTE_APP_URL}/auth/logout`)
+			? await axios.post(`${import.meta.env.VITE_REMOTE_APP_URL}/api/auth/logout`)
 			: await axios.post(`http://localhost:7050/api/auth/logout`);
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
