@@ -101,6 +101,7 @@ async function createChat(user: User) {
 	try {
 		const participants = [user, userService.getLoggedInUser() as User];
 		const res = await httpService.post(`${BASE_URL}/api/chat`, participants);
+		console.log(res);
 		return res;
 	} catch (err) {
 		console.log(err);
