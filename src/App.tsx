@@ -21,7 +21,6 @@ function App() {
 	const { theme } = useAppSelector(state => state.themeReducer);
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
-	console.log(import.meta.env);
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
 		import.meta.env.PROD

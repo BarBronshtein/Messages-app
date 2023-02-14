@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const NotFound = ({ error }: { error?: boolean }) => {
-	console.log(import.meta.env?.VITE_REMOTE_ASSETS_APP_URL);
 	const scareCrowImg =
 		'https://raw.githubusercontent.com/BarBronshtein/Bar-Bronshtein-19-10-22/main/src/assets/imgs/Scarecrow.png';
 	return (
