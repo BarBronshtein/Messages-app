@@ -59,7 +59,7 @@ const SideBar = ({ isShown, onClose }: Props) => {
 					className="cursor-pointer"
 				/>
 				<h4
-					className="grow ml-12 cursor-pointer"
+					className="grow ml-8 cursor-pointer"
 					onClick={() => setIsOpen(prev => !prev)}
 				>
 					{userService.getLoggedInUser().fullname}{' '}

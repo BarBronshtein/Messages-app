@@ -21,15 +21,9 @@ function App() {
 	const { theme } = useAppSelector(state => state.themeReducer);
 	const isMobile =
 		window.navigator.userAgent.indexOf('Mobile') !== -1 ? true : false;
-
+	console.log(import.meta.env);
 	const navigate = useNavigate();
 	const logout = async (to: string) => {
-		console.log(
-			import.meta.env.PROD,
-			import.meta.env.VITE_REMOTE_APP_URL,
-			process.env.PROD,
-			process.env.VITE_REMOTE_APP_URL
-		);
 		import.meta.env.PROD
 			? await axios.post(`${import.meta.env.VITE_REMOTE_APP_URL}/api/auth/logout`)
 			: await axios.post(`http://localhost:7050/api/auth/logout`);
