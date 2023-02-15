@@ -13,6 +13,7 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 		img: <img loading="lazy" className="rounded-lg" src={url} />,
 		audio: (
 			<audio controls>
+				<source src={url} type="audio/webm" />
 				<source src={url} type="audio/mpeg" />
 				<source src={url} type="audio/aac" />
 				<source src={url} type="audio/ogg" />
