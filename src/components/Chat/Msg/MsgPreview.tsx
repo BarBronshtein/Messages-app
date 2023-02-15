@@ -11,7 +11,15 @@ const MsgPreview = ({ txt, url, type, fromUser, id }: Message) => {
 	const types = {
 		video: <video className="rounded-lg" controls src={url}></video>,
 		img: <img loading="lazy" className="rounded-lg" src={url} />,
-		audio: <audio controls src={url}></audio>,
+		audio: (
+			<audio controls>
+				<source src={url} type="audio/mpeg" />
+				<source src={url} type="audio/aac" />
+				<source src={url} type="audio/ogg" />
+				<source src={url} type="audio/wav" />
+				Your browser does not support the audio tag
+			</audio>
+		),
 	};
 
 	const markup = type ? types[type] : '';
