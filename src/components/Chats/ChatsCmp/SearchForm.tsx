@@ -58,7 +58,7 @@ const SearchForm = () => {
 			)}
 
 			{userOptions && (
-				<div className="flex flex-col absolute w-full">
+				<div className="flex flex-col absolute w-full max-h-[375px] overflow-y-auto">
 					{userOptions.map((user: User) => (
 						<Contact key={user._id} user={user} clearContacts={clear} />
 					))}
