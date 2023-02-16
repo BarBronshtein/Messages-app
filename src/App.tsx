@@ -29,8 +29,13 @@ function App() {
 		sessionStorage.removeItem('loggedinUser');
 		navigate(`${to}`);
 	};
-
+	const pingRenderServer = () => {
+		try {
+			fetch(import.meta.env.VITE_REMOTE_APP_URL + '/ping');
+		} catch (err) {}
+	};
 	useEffect(() => {
+		pingRenderServer();
 		const gotoUnsubscribe = eventBus.on('onGoTo', navigate);
 		const logoutUnsubscribe = eventBus.on('onLogout', logout);
 		return () => {
