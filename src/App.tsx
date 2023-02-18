@@ -34,7 +34,13 @@ function App() {
 			fetch(import.meta.env.VITE_REMOTE_APP_URL + '/ping');
 		} catch (err) {}
 	};
+
 	useEffect(() => {
+		document.documentElement.style.setProperty(
+			'--vh',
+			window.innerHeight * 0.01 + 'px'
+		);
+
 		pingRenderServer();
 		const gotoUnsubscribe = eventBus.on('onGoTo', navigate);
 		const logoutUnsubscribe = eventBus.on('onLogout', logout);
@@ -45,7 +51,7 @@ function App() {
 	}, []);
 	return (
 		<div className="main-app">
-			<main className={`min-h-screen ${theme}`}>
+			<main className={`h-screen ${theme}`}>
 				<ErrorBoundary>
 					<Suspense fallback={<Loader />}>
 						<Routes>
