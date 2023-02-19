@@ -4,7 +4,7 @@ const NotFound = ({ error }: { error?: boolean }) => {
 	const scareCrowImg =
 		'https://raw.githubusercontent.com/BarBronshtein/Bar-Bronshtein-19-10-22/main/src/assets/imgs/Scarecrow.png';
 	return (
-		<section className="not-found container px-4 m-auto grid-cols-3 min-h-screen">
+		<section className="not-found container px-4 m-auto grid-cols-3 full-vh">
 			<header className="main-header py-5 lg:py-10">
 				<h3 className="uppercase text-2xl leading-6 font-bold ">
 					{error ? 'Something went wrong...' : '404 not found'}

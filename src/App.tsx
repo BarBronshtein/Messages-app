@@ -51,7 +51,7 @@ function App() {
 	}, []);
 	return (
 		<div className="main-app">
-			<main className={`h-screen ${theme}`}>
+			<main className={`full-vh ${theme}`}>
 				<ErrorBoundary>
 					<Suspense fallback={<Loader />}>
 						<Routes>

@@ -41,7 +41,7 @@ const Chat = (props: { className?: string }) => {
 		return () => socketService.off(ISocketTypes.SERVER_EMIT_ADD_MESSAGE);
 	}, []);
 	return (
-		<section className="chat flex flex-col min-h-screen h-screen dark:bg-[#242526] dark:text-white">
+		<section className="chat flex flex-col full-vh dark:bg-[#242526] dark:text-white">
 			<ChatHeader className={props.className} />
 			<MsgList />
 			<SendBar />

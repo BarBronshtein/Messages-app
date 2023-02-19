@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	width: 100vw;
+}
+
 /* MAC like scrollbar */
 *::-webkit-scrollbar {
 	width: 8px;
@@ -25,7 +29,13 @@
 	border-radius: 100px;
 }
 
-.h-screen {
+.full-vh {
 	height: 100vh /* Fallback for browsers that do not support Custom Properties */;
 	height: calc(var(--vh, 1vh) * 100);
+}
+
+@media (min-width: 640px) {
+	.full-vh {
+		height: 100vh;
+	}
 }
