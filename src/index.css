@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	width: 100vw;
-}
-
 /* MAC like scrollbar */
 *::-webkit-scrollbar {
 	width: 8px;

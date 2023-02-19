@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import ChatListHeader from './ChatsCmp/ChatListHeader';
 import ChatList from './ChatsCmp/ChatList';
 import SearchForm from './ChatsCmp/SearchForm';
@@ -11,15 +11,16 @@ import {
 import { ISocketTypes, socketService } from '@/services/socket.service';
 import { ChatOption } from '@/types';
 const Chats = () => {
-	const firstRender = useRef(true);
 	const dispatch = useAppDispatch();
 	const { chats } = useAppSelector(state => state.chatReducer);
+
 	useEffect(() => {
 		const isMobile = window.navigator.userAgent.indexOf('Mobile') !== -1;
 		// If mobile { gsi/client temp bug fix }
-		if (isMobile && firstRender.current) {
+		const stringify = sessionStorage.getItem('alreadyLoaded');
+		if (isMobile && stringify && JSON.parse(stringify)) {
 			window.location.reload();
-			firstRender.current = false;
+			sessionStorage.setItem('alreadyLoaded', 'true');
 		}
 	}, []);
 	useEffect(() => {
