@@ -15,15 +15,6 @@ const Chats = () => {
 	const { chats } = useAppSelector(state => state.chatReducer);
 
 	useEffect(() => {
-		const isMobile = window.navigator.userAgent.indexOf('Mobile') !== -1;
-		// If mobile { gsi/client temp bug fix }
-		const stringify = sessionStorage.getItem('alreadyLoaded');
-		if (isMobile && stringify && JSON.parse(stringify)) {
-			window.location.reload();
-			sessionStorage.setItem('alreadyLoaded', 'true');
-		}
-	}, []);
-	useEffect(() => {
 		socketService.on(
 			ISocketTypes.SERVER_EMIT_CONVERSATION_UPDATE,
 			(data: ChatOption) => dispatch(saveSocketConversation(data))

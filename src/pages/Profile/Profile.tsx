@@ -11,7 +11,7 @@ const Profile = () => {
 			<Suspense fallback={<div>Loading...</div>}>
 				<AppHeader />
 			</Suspense>
-			<div ref={ref}></div>;
+			<div ref={ref}></div>
 		</>
 	);
 };

@@ -12,7 +12,7 @@ const ProfileEdit = () => {
 			<Suspense fallback={<div>Loading...</div>}>
 				<AppHeader />
 			</Suspense>
-			<div className="profile-edit" ref={ref}></div>;
+			<div className="profile-edit" ref={ref}></div>
 		</>
 	);
 };
