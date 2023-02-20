@@ -26,9 +26,10 @@ const PickFile = ({ file, setFile, className, capture }: Props) => {
 		<input
 			ref={inputRef}
 			id="fileInput"
-			className="hidden"
-			onChange={ev => handleChange(ev)}
 			type="file"
+			className="hidden"
+			accept="image/*,video/*;"
+			onChange={ev => handleChange(ev)}
 		/>
 	);
 	return (
