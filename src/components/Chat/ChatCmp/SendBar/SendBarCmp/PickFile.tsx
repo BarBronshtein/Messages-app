@@ -15,7 +15,7 @@ const PickFile = ({ file, setFile, className, capture }: Props) => {
 	const markup = capture ? (
 		<input
 			ref={inputRef}
-			id="fileInput"
+			id={'fileInput' + className}
 			className="hidden"
 			accept="image/*,video/*;capture=camera"
 			onChange={ev => handleChange(ev)}
@@ -25,7 +25,7 @@ const PickFile = ({ file, setFile, className, capture }: Props) => {
 	) : (
 		<input
 			ref={inputRef}
-			id="fileInput"
+			id={'fileInput' + className}
 			type="file"
 			className="hidden"
 			accept="image/*,video/*;"
@@ -35,7 +35,7 @@ const PickFile = ({ file, setFile, className, capture }: Props) => {
 	return (
 		<>
 			<label
-				htmlFor="fileInput"
+				htmlFor={'fileInput' + className}
 				className={`fa-solid h-fit ${className} hover:bg-[#4444] hover:rounded-full p-2 cursor-pointer`}
 			></label>
 			{markup}
