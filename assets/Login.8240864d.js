@@ -1,1 +1,0 @@
-import{_ as e}from"./_virtual___federation__.8ee5a4c5.js";import{r as o,b as r}from"./index.4c6c3d2a.js";const n=await e("auth","./Login");let{LoginForm:a}=n;const f=()=>{const t=o.exports.useRef(null);return o.exports.useEffect(()=>{a(t.current)},[]),r("div",{ref:t})};export{f as default};
