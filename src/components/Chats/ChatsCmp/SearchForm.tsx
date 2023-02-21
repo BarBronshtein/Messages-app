@@ -34,7 +34,7 @@ const SearchForm = () => {
 		<form
 			onSubmit={onSubmit}
 			onClick={() => ref.current?.focus()}
-			className="hover:cursor-text max-w-[550px] relative z-0"
+			className="hover:cursor-text relative z-0"
 		>
 			<div className="input-group py-4 relative z-[-5] w-full text-gray-400">
 				<span className="fa-solid fa-magnifying-glass absolute text-sm  top-[2.2rem] left-4 dark:text-[#606770]"></span>
