@@ -13,7 +13,9 @@ import { ChatOption } from '@/types';
 const Chats = () => {
 	const dispatch = useAppDispatch();
 	const { chats } = useAppSelector(state => state.chatReducer);
-
+	useEffect(() => {
+		document.querySelector('#g_a11y_announcement')?.remove();
+	}, []);
 	useEffect(() => {
 		socketService.on(
 			ISocketTypes.SERVER_EMIT_CONVERSATION_UPDATE,
