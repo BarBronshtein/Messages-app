@@ -2,7 +2,7 @@ import Loader from '@/components/Loader/Loader';
 import { setUserMsg } from '@/store/actions/userMsgActions';
 import { useAppDispatch } from '@/store/TypeHooks';
 import React, { useEffect, useState } from 'react';
-
+import Worker from '@/services/base64.worker?worker';
 const FileToUrl = ({
 	file,
 	clearFile,
@@ -21,7 +21,7 @@ const FileToUrl = ({
 	useEffect(() => {
 		if (!file) return;
 
-		const worker = new Worker('/src/services/base64.worker.ts');
+		const worker = new Worker();
 		worker.postMessage(file);
 
 		worker.onmessage = (
