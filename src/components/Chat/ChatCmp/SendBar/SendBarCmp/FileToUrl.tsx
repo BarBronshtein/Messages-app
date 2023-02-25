@@ -57,7 +57,7 @@ const FileToUrl = ({
 	if (url === null)
 		return (
 			<div className={divClassName}>
-				<Loader />;
+				<Loader />
 			</div>
 		);
 	return <div className="absolute bottom-14">File is not supported</div>;

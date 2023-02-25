@@ -1,3 +1,5 @@
+import { utilService } from './util.service';
+
 onmessage = (ev: MessageEvent<File>) => {
 	const file = ev.data;
 	if (file.size > 5272880)
@@ -21,5 +23,3 @@ onmessage = (ev: MessageEvent<File>) => {
 	};
 	reader.readAsDataURL(file);
 };
-
-export {};
